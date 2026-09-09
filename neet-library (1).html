@@ -1,0 +1,2247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NEET Library</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================= TOKENS ============================= */
+:root{
+  --font-display:'Fraunces',serif;
+  --font-body:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  --radius-sm:6px; --radius-md:10px; --radius-lg:14px;
+  --sidebar-w:248px; --sidebar-w-collapsed:68px;
+  --shadow-1:0 1px 2px rgba(0,0,0,.35), 0 1px 1px rgba(0,0,0,.2);
+  --shadow-2:0 8px 24px rgba(0,0,0,.45);
+  --dur-1:120ms; --dur-2:220ms;
+}
+
+/* ---- Theme: Obsidian (default) ---- */
+[data-theme="obsidian"]{
+  --bg:#0b0b0d; --surface:#141418; --surface-2:#1b1b21; --surface-hover:#212128;
+  --border:#28282f; --border-soft:#1e1e24;
+  --text:#e7e5e1; --text-dim:#a3a1a0; --text-faint:#6f6d6f;
+  --accent:#b7bec7; --accent-strong:#d7dce1; --accent-contrast:#0b0b0d;
+  --gold:#9a9690;
+  --success:#7fae8e; --danger:#c17c72; --warn:#c9a35f;
+}
+/* ---- Theme: Burgundy ---- */
+[data-theme="burgundy"]{
+  --bg:#160a0d; --surface:#1f0f13; --surface-2:#28151a; --surface-hover:#331a20;
+  --border:#3a1e24; --border-soft:#2a161b;
+  --text:#efe6e0; --text-dim:#b89e9a; --text-faint:#7d6461;
+  --accent:#a5493f; --accent-strong:#c65c4f; --accent-contrast:#fdf1ee;
+  --gold:#b08a4e;
+  --success:#7fae8e; --danger:#c65c4f; --warn:#c9a35f;
+}
+/* ---- Theme: Espresso ---- */
+[data-theme="espresso"]{
+  --bg:#160f0b; --surface:#20160f; --surface-2:#291d14; --surface-hover:#33251a;
+  --border:#3c2c1e; --border-soft:#2a1e14;
+  --text:#efe3d3; --text-dim:#bfa78e; --text-faint:#8a765f;
+  --accent:#c08a4e; --accent-strong:#d9a566; --accent-contrast:#1a1108;
+  --gold:#c9a35f;
+  --success:#8fae7f; --danger:#c17257; --warn:#c9a35f;
+}
+/* ---- Theme: Forest ---- */
+[data-theme="forest"]{
+  --bg:#0b1310; --surface:#111c17; --surface-2:#17251f; --surface-hover:#1e2f27;
+  --border:#243a30; --border-soft:#182a22;
+  --text:#e5ece5; --text-dim:#a3b8a9; --text-faint:#6e8175;
+  --accent:#6f9c7c; --accent-strong:#8ab896; --accent-contrast:#0b1310;
+  --gold:#b0a05a;
+  --success:#8ab896; --danger:#c17c72; --warn:#c9a35f;
+}
+/* ---- Theme: Midnight ---- */
+[data-theme="midnight"]{
+  --bg:#0a0d16; --surface:#111524; --surface-2:#161c2f; --surface-hover:#1c2439;
+  --border:#26314d; --border-soft:#1a2338;
+  --text:#e4e7f0; --text-dim:#9ba3c0; --text-faint:#666e91;
+  --accent:#6c86c2; --accent-strong:#8ba0d4; --accent-contrast:#0a0d16;
+  --gold:#a4a377;
+  --success:#7fae9c; --danger:#c17c72; --warn:#c9a35f;
+}
+/* ---- Theme: Dark Academia ---- */
+[data-theme="academia"]{
+  --bg:#141210; --surface:#1c1916; --surface-2:#24201c; --surface-hover:#2c2721;
+  --border:#3a332a; --border-soft:#28231d;
+  --text:#ece4d3; --text-dim:#b6a98e; --text-faint:#847a63;
+  --accent:#9c8a4e; --accent-strong:#bfa662; --accent-contrast:#141210;
+  --gold:#bfa662;
+  --success:#8fae7f; --danger:#b76a5c; --warn:#c9a35f;
+}
+/* ---- Theme: Parchment (light) ---- */
+[data-theme="parchment"]{
+  --bg:#f3ecdb; --surface:#fffcf5; --surface-2:#f0e6cd; --surface-hover:#e8dab6;
+  --border:#d9c8a2; --border-soft:#e6d7b6;
+  --text:#2e2417; --text-dim:#6d5b3e; --text-faint:#9c8a68;
+  --accent:#8a5a34; --accent-strong:#6e4526; --accent-contrast:#fffaf0;
+  --gold:#a9772f;
+  --success:#4d7f5c; --danger:#a34b3f; --warn:#a9772f;
+}
+/* ---- Theme: Ivory (light) ---- */
+[data-theme="ivory"]{
+  --bg:#f6f6f3; --surface:#ffffff; --surface-2:#eeeeea; --surface-hover:#e4e4de;
+  --border:#d6d6cd; --border-soft:#e2e2da;
+  --text:#232320; --text-dim:#5c5c54; --text-faint:#8c8c80;
+  --accent:#3d4a5c; --accent-strong:#2a3441; --accent-contrast:#ffffff;
+  --gold:#96814a;
+  --success:#3f7d54; --danger:#a3453b; --warn:#a9772f;
+}
+/* ---- Theme: Sage Linen (light) ---- */
+[data-theme="sage-linen"]{
+  --bg:#f0f2e6; --surface:#fbfcf7; --surface-2:#e6ead6; --surface-hover:#dae1c4;
+  --border:#c7d0a9; --border-soft:#dbe2c2;
+  --text:#26301f; --text-dim:#5b6b4a; --text-faint:#8a9878;
+  --accent:#57724a; --accent-strong:#425939; --accent-contrast:#fbfcf7;
+  --gold:#8a7a3d;
+  --success:#4a7d55; --danger:#a04a3f; --warn:#a9772f;
+}
+
+*{box-sizing:border-box; margin:0; padding:0;}
+html,body{height:100%;}
+body{
+  background:var(--bg); color:var(--text); font-family:var(--font-body);
+  font-size:14px; line-height:1.5; -webkit-font-smoothing:antialiased;
+  overflow:hidden;
+}
+::selection{ background:var(--accent); color:var(--accent-contrast); }
+::-webkit-scrollbar{ width:9px; height:9px; }
+::-webkit-scrollbar-track{ background:transparent; }
+::-webkit-scrollbar-thumb{ background:var(--border); border-radius:8px; }
+::-webkit-scrollbar-thumb:hover{ background:var(--text-faint); }
+a{ color:inherit; }
+button{ font-family:inherit; }
+
+[data-density="compact"] { --pad-unit: 6px; --row-h: 30px; }
+[data-density="comfortable"] { --pad-unit: 10px; --row-h: 38px; }
+
+/* ============================= LAYOUT ============================= */
+.app-shell{ display:grid; grid-template-columns:var(--sidebar-w) 1fr; height:100vh; transition:grid-template-columns var(--dur-2) ease; }
+.app-shell.collapsed{ grid-template-columns:var(--sidebar-w-collapsed) 1fr; }
+
+/* ---------- Sidebar ---------- */
+.sidebar{
+  background:var(--surface); border-right:1px solid var(--border-soft);
+  display:flex; flex-direction:column; overflow:hidden; min-width:0;
+}
+.sidebar-header{
+  display:flex; align-items:center; gap:10px; padding:18px 16px 14px 18px;
+  border-bottom:1px solid var(--border-soft); flex-shrink:0; min-height:64px;
+}
+.brand-mark{
+  width:30px; height:30px; border-radius:8px; flex-shrink:0;
+  background:linear-gradient(155deg, var(--accent), var(--gold));
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--font-display); font-weight:600; font-size:15px; color:var(--accent-contrast);
+}
+.brand-text{ font-family:var(--font-display); font-weight:600; font-size:17px; white-space:nowrap; letter-spacing:.2px; }
+.app-shell.collapsed .brand-text, .app-shell.collapsed .sidebar-footer-text{ display:none; }
+
+.sidebar-scroll{ flex:1; overflow-y:auto; padding:14px 10px 14px 10px; }
+.nav-group{ margin-bottom:16px; }
+.nav-group-label{
+  font-size:11px; color:var(--text-faint); padding:0 10px 6px 10px; font-weight:500;
+  letter-spacing:.4px; white-space:nowrap;
+}
+.app-shell.collapsed .nav-group-label{ display:none; }
+.nav-item{
+  display:flex; align-items:center; gap:11px; padding:8px 10px; border-radius:var(--radius-sm);
+  cursor:pointer; color:var(--text-dim); font-size:13.5px; white-space:nowrap; overflow:hidden;
+  transition:background var(--dur-1) ease, color var(--dur-1) ease; user-select:none;
+  border:1px solid transparent;
+}
+.nav-item:hover{ background:var(--surface-hover); color:var(--text); }
+.nav-item.active{ background:var(--surface-2); color:var(--text); border-color:var(--border); }
+.nav-item.active .nav-ico{ color:var(--accent-strong); }
+.nav-ico{ width:17px; height:17px; flex-shrink:0; opacity:.85; }
+.nav-item .nav-count{ margin-left:auto; font-size:11px; color:var(--text-faint); }
+
+.sidebar-footer{
+  border-top:1px solid var(--border-soft); padding:12px 14px; flex-shrink:0;
+  display:flex; align-items:center; gap:9px;
+}
+.autosave-dot{ width:7px; height:7px; border-radius:50%; background:var(--success); flex-shrink:0; transition:background var(--dur-1); }
+.autosave-dot.saving{ background:var(--warn); animation:pulse 1s ease-in-out infinite; }
+@keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:.4;} }
+.sidebar-footer-text{ font-size:11.5px; color:var(--text-faint); white-space:nowrap; }
+.collapse-btn{
+  margin-left:auto; width:24px; height:24px; border-radius:6px; border:none; background:transparent;
+  color:var(--text-faint); cursor:pointer; display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+}
+.collapse-btn:hover{ background:var(--surface-hover); color:var(--text); }
+
+/* ---------- Main ---------- */
+.main{ display:flex; flex-direction:column; min-width:0; height:100vh; }
+.topbar{
+  height:64px; flex-shrink:0; display:flex; align-items:center; gap:14px;
+  padding:0 24px; border-bottom:1px solid var(--border-soft); background:var(--bg);
+}
+.breadcrumb{ font-size:13px; color:var(--text-dim); display:flex; align-items:center; gap:6px; white-space:nowrap; overflow:hidden; }
+.breadcrumb b{ color:var(--text); font-weight:500; }
+.breadcrumb .sep{ color:var(--text-faint); }
+.topbar-search{
+  flex:1; max-width:420px; display:flex; align-items:center; gap:8px;
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-md);
+  padding:8px 12px; color:var(--text-dim); cursor:pointer; transition:border-color var(--dur-1);
+}
+.topbar-search:hover{ border-color:var(--text-faint); }
+.topbar-search svg{ width:15px; height:15px; flex-shrink:0; opacity:.7; }
+.topbar-search span{ font-size:13px; }
+.kbd{ margin-left:auto; font-size:10.5px; border:1px solid var(--border); border-radius:4px; padding:1px 5px; color:var(--text-faint); }
+.topbar-actions{ display:flex; align-items:center; gap:10px; margin-left:auto; }
+
+.icon-btn{
+  width:34px; height:34px; border-radius:var(--radius-sm); border:1px solid var(--border);
+  background:var(--surface); color:var(--text-dim); display:flex; align-items:center; justify-content:center;
+  cursor:pointer; transition:all var(--dur-1) ease; flex-shrink:0;
+}
+.icon-btn:hover{ background:var(--surface-hover); color:var(--text); }
+.icon-btn svg{ width:16px; height:16px; }
+
+.content{ flex:1; overflow-y:auto; padding:28px 32px 60px 32px; }
+.page-header{ display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:22px; gap:16px; flex-wrap:wrap; }
+.page-title{ font-family:var(--font-display); font-size:26px; font-weight:600; letter-spacing:.1px; }
+.page-sub{ color:var(--text-dim); font-size:13px; margin-top:4px; }
+.page-actions{ display:flex; gap:10px; }
+
+/* ============================= BUTTONS ============================= */
+.btn{
+  display:inline-flex; align-items:center; gap:7px; padding:8px 14px; border-radius:var(--radius-sm);
+  border:1px solid var(--border); background:var(--surface); color:var(--text); font-size:13px;
+  font-weight:500; cursor:pointer; transition:all var(--dur-1) ease; white-space:nowrap;
+}
+.btn svg{ width:14px; height:14px; }
+.btn:hover{ background:var(--surface-hover); }
+.btn-primary{ background:var(--accent); color:var(--accent-contrast); border-color:var(--accent); }
+.btn-primary:hover{ background:var(--accent-strong); border-color:var(--accent-strong); }
+.btn-danger{ color:var(--danger); }
+.btn-danger:hover{ background:rgba(193,124,114,.12); }
+.btn-ghost{ background:transparent; border-color:transparent; }
+.btn-ghost:hover{ background:var(--surface-hover); }
+.btn-sm{ padding:5px 10px; font-size:12px; }
+.btn:disabled{ opacity:.45; cursor:not-allowed; }
+
+/* ============================= CARDS / GRID ============================= */
+.folder-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:14px; margin-bottom:30px; }
+.folder-card{
+  background:var(--surface); border:1px solid var(--border-soft); border-radius:var(--radius-md);
+  padding:16px; cursor:pointer; transition:all var(--dur-1) ease; display:flex; flex-direction:column; gap:10px;
+}
+.folder-card:hover{ border-color:var(--border); background:var(--surface-2); transform:translateY(-1px); box-shadow:var(--shadow-1); }
+.folder-card .f-ico{
+  width:34px; height:34px; border-radius:8px; background:var(--surface-2); display:flex; align-items:center; justify-content:center;
+  color:var(--accent-strong);
+}
+.folder-card .f-ico svg{ width:17px; height:17px; }
+.folder-card .f-name{ font-size:13.5px; font-weight:500; }
+.folder-card .f-count{ font-size:11.5px; color:var(--text-faint); }
+
+.section-label{ font-size:12px; text-transform:none; color:var(--text-faint); font-weight:500; margin:26px 0 12px 0; letter-spacing:.2px; }
+.section-label:first-child{ margin-top:0; }
+
+.resource-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:12px; }
+.resource-card{
+  background:var(--surface); border:1px solid var(--border-soft); border-radius:var(--radius-md);
+  padding:14px; display:flex; flex-direction:column; gap:9px; transition:all var(--dur-1) ease; cursor:pointer;
+  position:relative;
+}
+.resource-card:hover{ border-color:var(--border); box-shadow:var(--shadow-1); background:var(--surface-2); }
+.rc-top{ display:flex; align-items:flex-start; gap:10px; }
+.rc-ico{ width:30px; height:30px; border-radius:7px; flex-shrink:0; display:flex; align-items:center; justify-content:center; background:var(--surface-2); color:var(--accent-strong); }
+.rc-ico svg{ width:15px; height:15px; }
+.rc-name{ font-size:13px; font-weight:500; line-height:1.35; flex:1; }
+.rc-meta{ font-size:11px; color:var(--text-faint); display:flex; gap:6px; align-items:center; flex-wrap:wrap; }
+.rc-tags{ display:flex; gap:5px; flex-wrap:wrap; }
+.tag-chip{ font-size:10.5px; padding:2px 7px; border-radius:20px; background:var(--surface-2); color:var(--text-dim); border:1px solid var(--border-soft); }
+.rc-star{
+  position:absolute; top:12px; right:12px; width:22px; height:22px; border-radius:6px; border:none; background:transparent;
+  color:var(--text-faint); cursor:pointer; display:flex; align-items:center; justify-content:center;
+}
+.rc-star:hover{ background:var(--surface-2); color:var(--gold); }
+.rc-star.active{ color:var(--gold); }
+.rc-star svg{ width:15px; height:15px; }
+.rc-badge-ref{ font-size:9.5px; color:var(--text-faint); border:1px solid var(--border-soft); padding:1px 5px; border-radius:4px; }
+.rc-actions{ display:none; gap:6px; margin-top:2px; flex-wrap:wrap; }
+.resource-card:hover .rc-actions{ display:flex; }
+.rc-mini-btn{ font-size:11px; color:var(--text-dim); background:var(--surface-2); border:1px solid var(--border-soft); border-radius:5px; padding:3px 8px; cursor:pointer; }
+.rc-mini-btn:hover{ color:var(--text); border-color:var(--border); }
+
+.empty-state{
+  display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
+  padding:60px 20px; color:var(--text-faint); gap:10px;
+}
+.empty-state svg{ width:34px; height:34px; opacity:.4; margin-bottom:6px; }
+.empty-state h3{ font-family:var(--font-display); font-weight:500; font-size:16px; color:var(--text-dim); }
+.empty-state p{ font-size:12.5px; max-width:320px; }
+
+/* ============================= DASHBOARD ============================= */
+.dash-grid{ display:grid; grid-template-columns:2fr 1fr; gap:20px; align-items:start; }
+.dash-col{ display:flex; flex-direction:column; gap:20px; }
+.panel{ background:var(--surface); border:1px solid var(--border-soft); border-radius:var(--radius-lg); padding:18px 18px 8px 18px; }
+.panel-title{ font-family:var(--font-display); font-size:15px; font-weight:600; margin-bottom:12px; display:flex; align-items:center; justify-content:space-between; }
+.panel-title a{ font-family:var(--font-body); font-size:11.5px; color:var(--text-faint); font-weight:500; cursor:pointer; }
+.panel-title a:hover{ color:var(--text-dim); }
+.list-row{ display:flex; align-items:center; gap:10px; padding:9px 0; border-bottom:1px solid var(--border-soft); cursor:pointer; }
+.list-row:last-child{ border-bottom:none; }
+.list-row:hover .list-row-name{ color:var(--accent-strong); }
+.list-row-ico{ width:26px; height:26px; border-radius:6px; background:var(--surface-2); display:flex; align-items:center; justify-content:center; color:var(--accent-strong); flex-shrink:0; }
+.list-row-ico svg{ width:13px; height:13px; }
+.list-row-name{ font-size:12.5px; flex:1; }
+.list-row-sub{ font-size:11px; color:var(--text-faint); flex-shrink:0; }
+.stat-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-bottom:10px; }
+.stat-tile{ background:var(--surface-2); border:1px solid var(--border-soft); border-radius:var(--radius-md); padding:12px 14px; }
+.stat-num{ font-family:var(--font-display); font-size:22px; font-weight:600; }
+.stat-lbl{ font-size:11px; color:var(--text-faint); margin-top:2px; }
+.quick-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+.quick-tile{ background:var(--surface-2); border:1px solid var(--border-soft); border-radius:var(--radius-md); padding:14px 10px; text-align:center; cursor:pointer; transition:all var(--dur-1); }
+.quick-tile:hover{ border-color:var(--border); background:var(--surface-hover); }
+.quick-tile svg{ width:18px; height:18px; color:var(--accent-strong); margin-bottom:6px; }
+.quick-tile-lbl{ font-size:11.5px; color:var(--text-dim); }
+
+/* ============================= MODAL ============================= */
+.modal-overlay{
+  position:fixed; inset:0; background:rgba(0,0,0,.55); backdrop-filter:blur(2px);
+  display:flex; align-items:center; justify-content:center; z-index:200; opacity:0; pointer-events:none;
+  transition:opacity var(--dur-2) ease;
+}
+.modal-overlay.open{ opacity:1; pointer-events:auto; }
+.modal{
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg);
+  width:460px; max-width:92vw; max-height:86vh; overflow-y:auto; box-shadow:var(--shadow-2);
+  transform:translateY(6px) scale(.98); transition:transform var(--dur-2) ease;
+}
+.modal-overlay.open .modal{ transform:translateY(0) scale(1); }
+.modal.wide{ width:600px; }
+.modal-head{ padding:18px 20px; border-bottom:1px solid var(--border-soft); display:flex; align-items:center; justify-content:space-between; }
+.modal-head h3{ font-family:var(--font-display); font-size:16.5px; font-weight:600; }
+.modal-close{ width:26px; height:26px; border-radius:6px; border:none; background:transparent; color:var(--text-faint); cursor:pointer; display:flex; align-items:center; justify-content:center; }
+.modal-close:hover{ background:var(--surface-hover); color:var(--text); }
+.modal-body{ padding:18px 20px; display:flex; flex-direction:column; gap:14px; }
+.modal-foot{ padding:14px 20px 18px 20px; display:flex; justify-content:flex-end; gap:10px; border-top:1px solid var(--border-soft); }
+
+.field{ display:flex; flex-direction:column; gap:6px; }
+.field label{ font-size:12px; color:var(--text-dim); font-weight:500; }
+.field-hint{ font-size:11px; color:var(--text-faint); }
+.input, .select, textarea{
+  background:var(--surface-2); border:1px solid var(--border); color:var(--text); border-radius:var(--radius-sm);
+  padding:9px 11px; font-size:13px; font-family:inherit; width:100%; transition:border-color var(--dur-1);
+}
+.input:focus, .select:focus, textarea:focus{ outline:none; border-color:var(--accent); }
+textarea{ resize:vertical; min-height:60px; }
+.type-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:7px; }
+.type-opt{ display:flex; flex-direction:column; align-items:center; gap:5px; padding:9px 4px; border-radius:var(--radius-sm); border:1px solid var(--border); background:var(--surface-2); cursor:pointer; font-size:10.5px; color:var(--text-dim); }
+.type-opt svg{ width:15px; height:15px; }
+.type-opt.selected{ border-color:var(--accent); color:var(--text); background:var(--surface-hover); }
+.tag-input-row{ display:flex; flex-wrap:wrap; gap:6px; padding:7px 9px; background:var(--surface-2); border:1px solid var(--border); border-radius:var(--radius-sm); }
+.tag-input-row input{ border:none; background:transparent; outline:none; color:var(--text); font-size:12.5px; flex:1; min-width:80px; }
+.tag-chip.removable{ display:flex; align-items:center; gap:4px; cursor:default; }
+.tag-chip.removable button{ background:none; border:none; color:var(--text-faint); cursor:pointer; font-size:12px; line-height:1; padding:0; }
+.filepick-row{ display:flex; align-items:center; gap:10px; padding:10px; border:1px dashed var(--border); border-radius:var(--radius-sm); transition:all var(--dur-1); }
+.filepick-row .filename{ font-size:12px; color:var(--text-dim); flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.notice-box{ font-size:11.5px; color:var(--text-faint); background:var(--surface-2); border:1px solid var(--border-soft); border-radius:var(--radius-sm); padding:9px 11px; line-height:1.5; }
+.notice-box.warn{ border-color:rgba(201,163,95,.4); }
+.folder-select-tree{ max-height:220px; overflow-y:auto; border:1px solid var(--border); border-radius:var(--radius-sm); padding:6px; background:var(--surface-2); }
+.folder-select-item{ padding:6px 9px; font-size:12.5px; border-radius:5px; cursor:pointer; color:var(--text-dim); }
+.folder-select-item:hover{ background:var(--surface-hover); }
+.folder-select-item.selected{ background:var(--accent); color:var(--accent-contrast); }
+.folder-select-item.depth-1{ padding-left:22px; }
+.folder-select-item.depth-2{ padding-left:36px; }
+
+/* ============================= SEARCH OVERLAY ============================= */
+.search-overlay{ position:fixed; inset:0; background:rgba(0,0,0,.55); z-index:250; display:flex; align-items:flex-start; justify-content:center; padding-top:9vh; opacity:0; pointer-events:none; transition:opacity var(--dur-1); }
+.search-overlay.open{ opacity:1; pointer-events:auto; }
+.search-panel{ width:600px; max-width:92vw; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); box-shadow:var(--shadow-2); max-height:70vh; display:flex; flex-direction:column; overflow:hidden; }
+.search-input-row{ display:flex; align-items:center; gap:10px; padding:14px 16px; border-bottom:1px solid var(--border-soft); }
+.search-input-row svg{ width:17px; height:17px; color:var(--text-faint); flex-shrink:0; }
+.search-input-row input{ flex:1; background:none; border:none; outline:none; color:var(--text); font-size:15px; font-family:inherit; }
+.search-filters{ display:flex; gap:7px; padding:10px 16px; border-bottom:1px solid var(--border-soft); flex-wrap:wrap; }
+.filter-chip{ font-size:11px; padding:5px 10px; border-radius:20px; border:1px solid var(--border); background:var(--surface-2); color:var(--text-dim); cursor:pointer; }
+.filter-chip.active{ background:var(--accent); color:var(--accent-contrast); border-color:var(--accent); }
+.search-results{ overflow-y:auto; padding:8px; flex:1; }
+.search-result{ display:flex; align-items:center; gap:11px; padding:9px 10px; border-radius:var(--radius-sm); cursor:pointer; }
+.search-result:hover{ background:var(--surface-hover); }
+.search-result .sr-path{ font-size:10.5px; color:var(--text-faint); }
+
+/* ============================= SETTINGS ============================= */
+.settings-grid{ display:flex; flex-direction:column; gap:22px; max-width:640px; }
+.settings-section{ background:var(--surface); border:1px solid var(--border-soft); border-radius:var(--radius-lg); padding:18px 20px; }
+.settings-section h4{ font-family:var(--font-display); font-size:15px; font-weight:600; margin-bottom:14px; }
+.settings-row{ display:flex; align-items:center; justify-content:space-between; padding:11px 0; border-bottom:1px solid var(--border-soft); gap:16px; }
+.settings-row:last-child{ border-bottom:none; }
+.settings-row-label{ font-size:13px; }
+.settings-row-desc{ font-size:11.5px; color:var(--text-faint); margin-top:2px; }
+.theme-swatches{ display:flex; flex-direction:column; }
+.theme-group-label{ font-size:11px; color:var(--text-faint); font-weight:500; letter-spacing:.4px; margin:2px 0 8px 0; }
+.theme-swatches-row{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:16px; }
+.theme-swatches-row:last-child{ margin-bottom:0; }
+.theme-swatch{ border:1px solid var(--border); border-radius:var(--radius-md); padding:10px; cursor:pointer; display:flex; flex-direction:column; gap:8px; }
+.theme-swatch.selected{ border-color:var(--accent); }
+.swatch-preview{ height:34px; border-radius:6px; display:flex; overflow:hidden; }
+.swatch-preview span{ flex:1; }
+.theme-swatch-name{ font-size:11.5px; color:var(--text-dim); }
+.toggle{ position:relative; width:38px; height:22px; border-radius:20px; background:var(--surface-2); border:1px solid var(--border); cursor:pointer; flex-shrink:0; }
+.toggle::after{ content:''; position:absolute; top:2px; left:2px; width:16px; height:16px; border-radius:50%; background:var(--text-faint); transition:all var(--dur-1); }
+.toggle.on{ background:var(--accent); border-color:var(--accent); }
+.toggle.on::after{ left:18px; background:var(--accent-contrast); }
+.segmented{ display:flex; border:1px solid var(--border); border-radius:var(--radius-sm); overflow:hidden; }
+.segmented button{ padding:6px 12px; font-size:12px; background:var(--surface-2); border:none; color:var(--text-dim); cursor:pointer; border-right:1px solid var(--border); }
+.segmented button:last-child{ border-right:none; }
+.segmented button.active{ background:var(--accent); color:var(--accent-contrast); }
+
+/* ============================= REVISION COUNTS ============================= */
+.rc-meta svg{ width:10px; height:10px; vertical-align:-1px; }
+
+/* ============================= IMAGE PREVIEW ============================= */
+#imagePreviewOverlay{ background:rgba(0,0,0,.85); }
+.preview-shell{ position:relative; width:92vw; height:88vh; max-width:1100px; display:flex; flex-direction:column; }
+.preview-topbar{ display:flex; align-items:center; justify-content:space-between; padding:4px 4px 12px 4px; flex-shrink:0; }
+.preview-name{ font-size:13px; color:#f1f1ee; font-weight:500; }
+.preview-topbar-actions{ display:flex; gap:8px; }
+.preview-topbar-actions .icon-btn{ background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.15); color:#fff; }
+.preview-topbar-actions .icon-btn:hover{ background:rgba(255,255,255,.18); }
+.preview-topbar-actions .icon-btn.active{ color:var(--gold); }
+.preview-body{ flex:1; display:flex; align-items:center; justify-content:center; overflow:hidden; min-height:0; }
+.preview-body img{ max-width:100%; max-height:100%; border-radius:8px; box-shadow:0 12px 40px rgba(0,0,0,.5); object-fit:contain; }
+.preview-nav{ position:absolute; left:50%; bottom:16px; transform:translateX(-50%); display:flex; align-items:center; gap:2px; background:rgba(24,24,24,.75); backdrop-filter:blur(6px); border-radius:999px; padding:4px; box-shadow:0 6px 20px rgba(0,0,0,.4); }
+.preview-nav-btn{ width:36px; height:36px; border-radius:50%; border:none; background:transparent; color:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:background var(--dur-1); flex-shrink:0; }
+.preview-nav-btn svg{ width:18px; height:18px; }
+.preview-nav-btn:hover{ background:rgba(255,255,255,.16); }
+.preview-nav-btn:disabled{ opacity:.28; cursor:not-allowed; }
+.preview-nav-btn:disabled:hover{ background:transparent; }
+.preview-nav-pos{ font-size:11px; color:rgba(255,255,255,.75); padding:0 10px; min-width:44px; text-align:center; flex-shrink:0; }
+
+/* ============================= TOAST ============================= */
+.toast-wrap{ position:fixed; bottom:20px; right:20px; display:flex; flex-direction:column; gap:8px; z-index:400; }
+.toast{ background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-sm); padding:10px 14px; font-size:12.5px; box-shadow:var(--shadow-2); display:flex; align-items:center; gap:8px; animation:toastIn var(--dur-2) ease; }
+@keyframes toastIn{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
+
+/* ============================= RESPONSIVE ============================= */
+@media (max-width:880px){
+  .app-shell{ grid-template-columns:0 1fr; }
+  .app-shell:not(.mobile-open) .sidebar{ display:none; }
+  .app-shell.mobile-open{ grid-template-columns:var(--sidebar-w) 1fr; }
+  .dash-grid{ grid-template-columns:1fr; }
+  .quick-grid{ grid-template-columns:repeat(2,1fr); }
+  .content{ padding:20px 16px 50px 16px; }
+  .topbar{ padding:0 14px; }
+  .topbar-search span{ display:none; }
+  .mobile-menu-btn{ display:flex !important; }
+}
+.mobile-menu-btn{ display:none; }
+
+/* misc */
+.hidden{ display:none !important; }
+.small-note{ font-size:11px; color:var(--text-faint); }
+.pathline{ font-size:11.5px; color:var(--text-faint); margin-top:-14px; margin-bottom:6px; }
+</style>
+</head>
+<body data-theme="obsidian" data-density="comfortable">
+
+<div class="app-shell" id="appShell">
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="brand-mark">N</div>
+      <div class="brand-text">NEET Library</div>
+    </div>
+    <div class="sidebar-scroll" id="navScroll"></div>
+    <div class="sidebar-footer">
+      <div class="autosave-dot" id="autosaveDot" title="All changes saved"></div>
+      <div class="sidebar-footer-text" id="autosaveText">All changes saved</div>
+      <button class="collapse-btn" id="collapseBtn" title="Collapse sidebar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M9 18l-6-6 6-6M20 12H4"/></svg>
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <div class="topbar">
+      <button class="icon-btn mobile-menu-btn" id="mobileMenuBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
+      <div class="breadcrumb" id="breadcrumb"></div>
+      <div class="topbar-search" id="topbarSearch">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.3-4.3"/></svg>
+        <span>Search your library…</span>
+        <span class="kbd" id="searchKbdHint">⌘K</span>
+      </div>
+      <div class="topbar-actions">
+        <button class="icon-btn" id="themeBtn" title="Change theme">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        </button>
+        <button class="btn btn-sm" id="importFolderBtn" title="Add every file inside a folder at once">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/><path d="M12 11v5M9.5 13.5H14.5"/></svg>
+          Import folder
+        </button>
+        <button class="btn btn-primary btn-sm" id="addResourceBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+          Add resource
+        </button>
+      </div>
+    </div>
+    <div class="content" id="content"></div>
+  </div>
+</div>
+
+<!-- SEARCH OVERLAY -->
+<div class="search-overlay" id="searchOverlay">
+  <div class="search-panel">
+    <div class="search-input-row">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input type="text" id="searchInput" placeholder="Search by name, tag, folder, chapter…" />
+      <span class="kbd">esc</span>
+    </div>
+    <div class="search-filters" id="searchFilters"></div>
+    <div class="search-results" id="searchResults"></div>
+  </div>
+</div>
+
+<!-- IMAGE PREVIEW -->
+<div class="modal-overlay" id="imagePreviewOverlay">
+  <div class="preview-shell">
+    <div class="preview-topbar">
+      <div class="preview-name" id="previewName"></div>
+      <div class="preview-topbar-actions">
+        <button class="icon-btn" id="previewFavBtn" title="Favourite"></button>
+        <button class="icon-btn" id="previewOpenBtn" title="Open in new tab">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>
+        </button>
+        <button class="icon-btn" id="previewCloseBtn" title="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="preview-body">
+      <img id="previewImg" src="" alt="" />
+    </div>
+    <div class="preview-nav" id="previewNav">
+      <button class="preview-nav-btn" id="previewPrevBtn" title="Previous (←)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <div class="preview-nav-pos" id="previewPos"></div>
+      <button class="preview-nav-btn" id="previewNextBtn" title="Next (→)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- RESOURCE MODAL -->
+<div class="modal-overlay" id="resourceModalOverlay">
+  <div class="modal wide">
+    <div class="modal-head">
+      <h3 id="resourceModalTitle">Add resource</h3>
+      <button class="modal-close" id="resourceModalClose">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="field">
+        <label>Name</label>
+        <input class="input" id="rf-name" placeholder="e.g. Laws of Motion — Short Notes" />
+      </div>
+      <div class="field">
+        <label>Type</label>
+        <div class="type-grid" id="rf-type-grid"></div>
+      </div>
+      <div class="field" id="rf-source-field">
+        <label id="rf-source-label">Link (URL)</label>
+        <input class="input" id="rf-url" placeholder="https://…" />
+        <div class="filepick-row hidden" id="rf-filepick-row">
+          <button class="btn btn-sm" id="rf-filepick-btn">Choose file…</button>
+          <span class="filename" id="rf-filename">No file chosen — or drag one here</span>
+        </div>
+        <div class="notice-box hidden" id="rf-file-notice"></div>
+        <div class="field-hint" id="rf-import-folder-hint" style="cursor:pointer; text-decoration:underline; text-underline-offset:2px;">Adding several files at once? Import a whole folder instead →</div>
+      </div>
+      <div class="field">
+        <label>Folder</label>
+        <div class="folder-select-tree" id="rf-folder-tree"></div>
+      </div>
+      <div class="field">
+        <label>Tags</label>
+        <div class="tag-input-row" id="rf-tag-row">
+          <input type="text" id="rf-tag-input" placeholder="Type a tag, press Enter" />
+        </div>
+      </div>
+      <div class="field">
+        <label>Notes <span class="field-hint">(optional, short)</span></label>
+        <textarea id="rf-notes" placeholder="Anything worth remembering about this resource…"></textarea>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-danger hidden" id="rf-delete-btn">Delete</button>
+      <div style="flex:1"></div>
+      <button class="btn" id="rf-cancel-btn">Cancel</button>
+      <button class="btn btn-primary" id="rf-save-btn">Save resource</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOLDER MODAL -->
+<div class="modal-overlay" id="folderModalOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="ff-title">New folder</h3>
+      <button class="modal-close" id="folderModalClose">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="field">
+        <label>Folder name</label>
+        <input class="input" id="ff-name" placeholder="e.g. Chapter 4 — Thermodynamics" />
+      </div>
+      <div class="small-note" id="ff-location"></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-danger hidden" id="ff-delete-btn">Delete folder</button>
+      <div style="flex:1"></div>
+      <button class="btn" id="ff-cancel-btn">Cancel</button>
+      <button class="btn btn-primary" id="ff-save-btn">Create folder</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOLDER CONTEXT MENU -->
+<div class="hidden" id="folderMenu" style="position:fixed; z-index:300; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-sm); box-shadow:var(--shadow-2); min-width:150px; overflow:hidden;">
+  <div class="folder-menu-item" data-act="rename" style="padding:9px 13px; font-size:12.5px; cursor:pointer; color:var(--text-dim);">Rename</div>
+  <div class="folder-menu-item" data-act="delete" style="padding:9px 13px; font-size:12.5px; cursor:pointer; color:var(--danger);">Delete folder</div>
+</div>
+
+<!-- CONFIRM MODAL -->
+<div class="modal-overlay" id="confirmModalOverlay">
+  <div class="modal" style="width:380px">
+    <div class="modal-head"><h3 id="confirmTitle">Are you sure?</h3></div>
+    <div class="modal-body"><p id="confirmBody" style="font-size:13px; color:var(--text-dim);"></p></div>
+    <div class="modal-foot">
+      <button class="btn" id="confirmCancelBtn">Cancel</button>
+      <button class="btn btn-danger" id="confirmOkBtn">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<!-- THEME MODAL -->
+<div class="modal-overlay" id="themeModalOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>Choose a theme</h3>
+      <button class="modal-close" id="themeModalClose">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="theme-swatches" id="themeSwatches"></div>
+    </div>
+  </div>
+</div>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<input type="file" id="hiddenFileInput" class="hidden" />
+<input type="file" id="folderImportInput" class="hidden" webkitdirectory directory multiple />
+
+<script>
+/* ============================================================
+   NEET LIBRARY — app.js
+   Persistence: window.storage (personal, non-shared)
+   ============================================================ */
+
+/* ---------------------- ICONS ---------------------- */
+const ICONS = {
+  ncert: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>',
+  physics: '<circle cx="12" cy="12" r="1"/><ellipse cx="12" cy="12" rx="10" ry="4.5"/><ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(120 12 12)"/>',
+  chemistry: '<path d="M9 2v6.5L4 18a2 2 0 0 0 1.8 3h12.4a2 2 0 0 0 1.8-3l-5-9.5V2"/><path d="M9 2h6"/><path d="M6.5 14h11"/>',
+  botany: '<path d="M12 22V12"/><path d="M12 12C12 7 8 4 4 4c0 5 3 8 8 8z"/><path d="M12 12c0-5 4-8 8-8 0 5-3 8-8 8z"/>',
+  zoology: '<path d="M4.5 12.5c0-4 2.5-7 5.5-7 2 0 3 1.5 3 3.5"/><path d="M19.5 12.5c0-4-2.5-7-5.5-7-2 0-3 1.5-3 3.5"/><path d="M6 12.5c-2 1-3 3-2.5 5.5 2 1 4.5.5 6-1"/><path d="M18 12.5c2 1 3 3 2.5 5.5-2 1-4.5.5-6-1"/><circle cx="12" cy="13" r="3.2"/>',
+  mindmap: '<circle cx="5" cy="12" r="2.2"/><circle cx="19" cy="6" r="2.2"/><circle cx="19" cy="12" r="2.2"/><circle cx="19" cy="18" r="2.2"/><path d="M7.2 12h9.6M8 11l9-4M8 13l9 4"/>',
+  revision: '<path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/><path d="M12 8v4l3 2"/>',
+  strategy: '<path d="M4 21V9M4 9l4-3 4 2 4-3 4 2v10l-4-2-4 3-4-2-4 2z"/>',
+  favourite: '<path d="M12 17.3l-6.2 3.6 1.6-7-5.4-4.7 7.1-.6L12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7z"/>',
+  search: '<circle cx="11" cy="11" r="8"/><path d="M21 21l-4.3-4.3"/>',
+  settings: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>',
+  home: '<path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/>',
+  folder: '<path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/>',
+  pdf: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><text x="7" y="17" font-size="6" fill="currentColor" stroke="none">PDF</text>',
+  image: '<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/>',
+  link: '<path d="M10 13a5 5 0 0 0 7.5.5l2-2a5 5 0 0 0-7-7l-1.2 1.2"/><path d="M14 11a5 5 0 0 0-7.5-.5l-2 2a5 5 0 0 0 7 7l1.1-1.1"/>',
+  html: '<path d="M4 3h16l-1.5 16.5L12 21l-6.5-1.5z"/><path d="M8 8h8M8 12h6M8 16h4" stroke="var(--surface)"/>',
+  video: '<rect x="2" y="5" width="15" height="14" rx="2"/><path d="M17 10l5-3v10l-5-3z"/>',
+  document: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h5"/>',
+  formula: '<path d="M6 4h12M8 4l-3 16h3M13 4l3 16h3M9 12h6"/>',
+  note: '<path d="M4 4h16v16H4z"/><path d="M8 8h8M8 12h8M8 16h4"/>',
+  other: '<circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/>',
+  star: '<path d="M12 17.3l-6.2 3.6 1.6-7-5.4-4.7 7.1-.6L12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7z"/>',
+  starFilled: '<path d="M12 17.3l-6.2 3.6 1.6-7-5.4-4.7 7.1-.6L12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7z" fill="currentColor"/>',
+  chevronRight: '<path d="M9 18l6-6-6-6"/>',
+  chevronLeft: '<path d="M15 18l-6-6 6-6"/>',
+  clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/>',
+  external: '<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/>',
+  upload: '<path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/><path d="M7 9l5-5 5 5"/><path d="M12 4v13"/>',
+  download: '<path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/><path d="M7 11l5 5 5-5"/><path d="M12 16V3"/>',
+  trash: '<path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>',
+  check: '<path d="M20 6L9 17l-5-5"/>',
+  plus: '<path d="M12 5v14M5 12h14"/>',
+};
+function icon(name, size=16){ return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="${size}" height="${size}">${ICONS[name]||ICONS.other}</svg>`; }
+
+const RESOURCE_TYPES = [
+  {id:'pdf', label:'PDF', ico:'pdf', kind:'file'},
+  {id:'image', label:'Image', ico:'image', kind:'file'},
+  {id:'link', label:'Website link', ico:'link', kind:'url'},
+  {id:'video', label:'Video link', ico:'video', kind:'url'},
+  {id:'html', label:'HTML file', ico:'html', kind:'file'},
+  {id:'document', label:'Document', ico:'document', kind:'file'},
+  {id:'formula', label:'Formula sheet', ico:'formula', kind:'file'},
+  {id:'note', label:'Note file', ico:'note', kind:'file'},
+  {id:'other', label:'Other', ico:'other', kind:'file'},
+];
+function typeMeta(id){ return RESOURCE_TYPES.find(t=>t.id===id) || RESOURCE_TYPES[RESOURCE_TYPES.length-1]; }
+
+const THEMES = [
+  {id:'burgundy', name:'Burgundy / Wine', colors:['#160a0d','#a5493f','#b08a4e'], mode:'dark'},
+  {id:'obsidian', name:'Obsidian', colors:['#0b0b0d','#b7bec7','#9a9690'], mode:'dark'},
+  {id:'espresso', name:'Espresso', colors:['#160f0b','#c08a4e','#d9a566'], mode:'dark'},
+  {id:'forest', name:'Forest', colors:['#0b1310','#6f9c7c','#b0a05a'], mode:'dark'},
+  {id:'midnight', name:'Midnight', colors:['#0a0d16','#6c86c2','#a4a377'], mode:'dark'},
+  {id:'academia', name:'Dark Academia', colors:['#141210','#9c8a4e','#bfa662'], mode:'dark'},
+  {id:'parchment', name:'Parchment', colors:['#f3ecdb','#8a5a34','#a9772f'], mode:'light'},
+  {id:'ivory', name:'Ivory', colors:['#f6f6f3','#3d4a5c','#96814a'], mode:'light'},
+  {id:'sage-linen', name:'Sage Linen', colors:['#f0f2e6','#57724a','#8a7a3d'], mode:'light'},
+];
+
+/* ---------------------- DEFAULT LIBRARY TREE ---------------------- */
+function defaultSubjectFolders(extra){
+  return ['Notes','Short Notes','Mind Maps','PYQs',...extra,'Important'];
+}
+function buildDefaultTree(){
+  const uidCounter = {n:0};
+  function mk(name, icoKey, children){
+    return {id:'f_'+(uidCounter.n++)+'_'+Math.random().toString(36).slice(2,7), name, custom:false, children: children||[]};
+  }
+  function leaf(name){ return mk(name, null, []); }
+
+  const tree = [
+    mk('NCERT', 'ncert', [
+      mk('Physics', null, [ mk('Class 11', null, []), mk('Class 12', null, []) ]),
+      mk('Chemistry', null, [ mk('Class 11', null, []), mk('Class 12', null, []) ]),
+      mk('Biology', null, [ mk('Class 11', null, []), mk('Class 12', null, []) ]),
+    ]),
+    mk('Physics', 'physics', defaultSubjectFolders(['Formulae']).map(leaf)),
+    mk('Chemistry', 'chemistry', defaultSubjectFolders(['Formulae & Reactions']).map(leaf)),
+    mk('Botany', 'botany', defaultSubjectFolders(['Diagrams']).map(leaf)),
+    mk('Zoology', 'zoology', defaultSubjectFolders(['Diagrams']).map(leaf)),
+    mk('Mind Maps', 'mindmap', []),
+    mk('NEET Strategies', 'strategy', ['Study Strategy','Revision Strategy','Test Strategy','Time Management','Exam Strategy'].map(leaf)),
+  ];
+  return tree;
+}
+
+/* ---------------------- STORAGE LAYER ----------------------
+   Persists to the browser's own IndexedDB (works when this file is
+   opened directly, double-clicked, or saved to disk — no external
+   service required). Falls back to localStorage if IndexedDB is
+   unavailable, and still uses window.storage first when present
+   (e.g. inside the Claude artifact preview) so both contexts work. */
+const STORE_KEY_DATA = 'app:data:v1';
+const STORE_KEY_SETTINGS = 'app:settings:v1';
+const SCHEMA_VERSION = 1;
+
+const IDB_NAME = 'neet-library-db';
+const IDB_VERSION = 1;
+const IDB_STORE = 'kv';
+let idbPromise = null;
+function openIDB(){
+  if(idbPromise) return idbPromise;
+  idbPromise = new Promise((resolve, reject)=>{
+    if(!('indexedDB' in window)){ reject(new Error('IndexedDB unavailable')); return; }
+    const req = indexedDB.open(IDB_NAME, IDB_VERSION);
+    req.onupgradeneeded = (e)=>{
+      const db = e.target.result;
+      if(!db.objectStoreNames.contains(IDB_STORE)) db.createObjectStore(IDB_STORE);
+    };
+    req.onsuccess = ()=> resolve(req.result);
+    req.onerror = ()=> reject(req.error);
+    req.onblocked = ()=> reject(new Error('IndexedDB blocked'));
+  });
+  return idbPromise;
+}
+function idbPut(key, value){
+  return openIDB().then(db=> new Promise((resolve, reject)=>{
+    const tx = db.transaction(IDB_STORE, 'readwrite');
+    tx.objectStore(IDB_STORE).put(value, key);
+    tx.oncomplete = ()=> resolve(true);
+    tx.onerror = ()=> reject(tx.error);
+  }));
+}
+function idbFetch(key){
+  return openIDB().then(db=> new Promise((resolve, reject)=>{
+    const tx = db.transaction(IDB_STORE, 'readonly');
+    const req = tx.objectStore(IDB_STORE).get(key);
+    req.onsuccess = ()=> resolve(req.result);
+    req.onerror = ()=> reject(req.error);
+  }));
+}
+function lsPut(key, value){ try{ localStorage.setItem(key, JSON.stringify(value)); return true; }catch(e){ return false; } }
+function lsFetch(key){ try{ const v = localStorage.getItem(key); return v==null ? undefined : JSON.parse(v); }catch(e){ return undefined; } }
+
+async function storageSet(key, value){
+  // Prefer the host artifact's storage API when it's actually present.
+  if(window.storage && typeof window.storage.set === 'function'){
+    try{ await window.storage.set(key, JSON.stringify(value), false); return true; }
+    catch(e){ console.warn('window.storage.set failed, falling back to IndexedDB', e); }
+  }
+  try{ await idbPut(key, value); return true; }
+  catch(e){ console.warn('IndexedDB save failed, falling back to localStorage', e); }
+  return lsPut(key, value);
+}
+async function storageGet(key){
+  if(window.storage && typeof window.storage.get === 'function'){
+    try{
+      const r = await window.storage.get(key, false);
+      if(r && r.value != null) return JSON.parse(r.value);
+    }catch(e){ console.warn('window.storage.get failed, falling back to IndexedDB', e); }
+  }
+  try{
+    const v = await idbFetch(key);
+    if(v !== undefined) return v;
+  }catch(e){ console.warn('IndexedDB read failed, falling back to localStorage', e); }
+  return lsFetch(key);
+}
+
+let DATA = null;     // { version, tree:[...], resources:{id:resource}, favourites:[ids], revision:{id:{marked,markedAt}} }
+let SETTINGS = null; // { version, theme, density, sidebarCollapsed, defaultSort, defaultView, confirmDestructive, dashboardWidgets }
+
+function defaultSettings(){
+  return {
+    version: SCHEMA_VERSION,
+    theme: 'obsidian',
+    density: 'comfortable',
+    sidebarCollapsed: false,
+    defaultSort: 'recent',
+    defaultView: 'grid',
+    confirmDestructive: true,
+    lastExportAt: null,
+  };
+}
+function defaultData(){
+  return {
+    version: SCHEMA_VERSION,
+    tree: buildDefaultTree(),
+    resources: {},
+    favourites: [],
+    revision: {},
+  };
+}
+
+let saveTimer = null;
+let pendingSave = false;
+function markSaving(){
+  pendingSave = true;
+  const dot = document.getElementById('autosaveDot');
+  const txt = document.getElementById('autosaveText');
+  dot.classList.add('saving');
+  txt.textContent = 'Saving…';
+}
+function markSaved(){
+  pendingSave = false;
+  const dot = document.getElementById('autosaveDot');
+  const txt = document.getElementById('autosaveText');
+  dot.classList.remove('saving');
+  txt.textContent = 'All changes saved';
+}
+
+async function persistData(){
+  markSaving();
+  try{
+    await storageSet(STORE_KEY_DATA, DATA);
+    markSaved();
+  }catch(e){
+    console.error('Save failed', e);
+    document.getElementById('autosaveText').textContent = 'Save failed — retrying…';
+    setTimeout(()=>persistData(), 1500);
+  }
+}
+async function persistSettings(){
+  markSaving();
+  try{
+    await storageSet(STORE_KEY_SETTINGS, SETTINGS);
+    markSaved();
+  }catch(e){
+    console.error('Settings save failed', e);
+  }
+}
+function scheduleSaveData(){
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(()=>persistData(), 350);
+}
+function scheduleSaveSettings(){
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(()=>persistSettings(), 250);
+}
+// Best-effort warning if the tab is closed mid-debounce, so a save in flight isn't silently dropped.
+window.addEventListener('beforeunload', (e)=>{
+  if(pendingSave){ e.preventDefault(); e.returnValue = ''; }
+});
+
+async function loadAll(){
+  try{
+    const d = await storageGet(STORE_KEY_DATA);
+    DATA = d || defaultData();
+  }catch(e){ DATA = defaultData(); }
+  try{
+    const s = await storageGet(STORE_KEY_SETTINGS);
+    SETTINGS = s || defaultSettings();
+  }catch(e){ SETTINGS = defaultSettings(); }
+  // migrations placeholder
+  if(!DATA.version) DATA.version = SCHEMA_VERSION;
+  if(!SETTINGS.version) SETTINGS.version = SCHEMA_VERSION;
+}
+
+/* ---------------------- HELPERS ---------------------- */
+function uid(){ return 'r_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2,8); }
+function findFolder(id, nodes=DATA.tree, path=[]){
+  for(const n of nodes){
+    const p = [...path, n];
+    if(n.id === id) return p;
+    if(n.children && n.children.length){
+      const found = findFolder(id, n.children, p);
+      if(found) return found;
+    }
+  }
+  return null;
+}
+function folderById(id, nodes=DATA.tree){
+  for(const n of nodes){
+    if(n.id === id) return n;
+    if(n.children){ const f = folderById(id, n.children); if(f) return f; }
+  }
+  return null;
+}
+function allFolderIdsUnder(id){
+  const f = folderById(id);
+  const out = [];
+  (function walk(n){ out.push(n.id); (n.children||[]).forEach(walk); })(f);
+  return out;
+}
+function resourcesInFolder(folderId, includeSub=false){
+  const ids = includeSub ? new Set(allFolderIdsUnder(folderId)) : new Set([folderId]);
+  return Object.values(DATA.resources).filter(r => ids.has(r.folderId));
+}
+function timeAgo(ts){
+  const s = Math.floor((Date.now()-ts)/1000);
+  if(s<60) return 'just now';
+  if(s<3600) return Math.floor(s/60)+'m ago';
+  if(s<86400) return Math.floor(s/3600)+'h ago';
+  if(s<86400*30) return Math.floor(s/86400)+'d ago';
+  return new Date(ts).toLocaleDateString(undefined,{month:'short', day:'numeric', year:'numeric'});
+}
+function toast(msg, icoName='check'){
+  const wrap = document.getElementById('toastWrap');
+  const el = document.createElement('div');
+  el.className = 'toast';
+  el.innerHTML = icon(icoName,14) + '<span>'+escapeHtml(msg)+'</span>';
+  wrap.appendChild(el);
+  setTimeout(()=>{ el.style.opacity='0'; el.style.transition='opacity .3s'; setTimeout(()=>el.remove(),300); }, 2600);
+}
+function escapeHtml(s){
+  const d = document.createElement('div'); d.textContent = s==null?'':String(s); return d.innerHTML;
+}
+function bytesToSize(bytes){
+  if(!bytes) return '';
+  const units=['B','KB','MB']; let i=0; let n=bytes;
+  while(n>=1024 && i<units.length-1){ n/=1024; i++; }
+  return n.toFixed(n<10&&i>0?1:0)+' '+units[i];
+}
+
+/* ---------------------- NAV STRUCTURE ---------------------- */
+// top-level nav items (fixed sections) + dynamic subject/folder tree underneath
+const NAV_SECTIONS = [
+  {group:'Library', items:[
+    {id:'dashboard', label:'Dashboard', ico:'home'},
+    {id:'ncert', label:'NCERT', ico:'ncert', folder:true},
+  ]},
+  {group:'Subjects', items:[
+    {id:'physics', label:'Physics', ico:'physics', folder:true},
+    {id:'chemistry', label:'Chemistry', ico:'chemistry', folder:true},
+    {id:'botany', label:'Botany', ico:'botany', folder:true},
+    {id:'zoology', label:'Zoology', ico:'zoology', folder:true},
+    {id:'mindmaps', label:'Mind Maps', ico:'mindmap', folder:true},
+  ]},
+  {group:'Study Tools', items:[
+    {id:'revision', label:'Revision', ico:'revision'},
+    {id:'strategies', label:'NEET Strategies', ico:'strategy', folder:true},
+    {id:'favourites', label:'Favourites', ico:'favourite'},
+  ]},
+  {group:'', items:[
+    {id:'settings', label:'Settings', ico:'settings'},
+  ]},
+];
+// map nav item id -> tree folder name (top-level) for folder:true entries
+const NAV_TO_TREE_NAME = {
+  ncert:'NCERT', physics:'Physics', chemistry:'Chemistry', botany:'Botany', zoology:'Zoology',
+  mindmaps:'Mind Maps', strategies:'NEET Strategies'
+};
+
+let STATE = {
+  view: 'dashboard',       // dashboard | folder | revision | favourites | settings
+  folderId: null,          // active folder id when view === 'folder'
+  breadcrumbPath: [],
+};
+let bannerDismissedThisSession = false;
+
+/* ---------------------- RENDER: SIDEBAR ---------------------- */
+function topFolderIdByName(name){
+  const f = DATA.tree.find(n=>n.name===name);
+  return f ? f.id : null;
+}
+function countInSubject(navId){
+  const name = NAV_TO_TREE_NAME[navId];
+  if(!name) return 0;
+  const fid = topFolderIdByName(name);
+  if(!fid) return 0;
+  return resourcesInFolder(fid, true).length;
+}
+function renderSidebar(){
+  const nav = document.getElementById('navScroll');
+  nav.innerHTML = '';
+  NAV_SECTIONS.forEach(section=>{
+    const g = document.createElement('div');
+    g.className = 'nav-group';
+    if(section.group){
+      const lbl = document.createElement('div');
+      lbl.className = 'nav-group-label';
+      lbl.textContent = section.group;
+      g.appendChild(lbl);
+    }
+    section.items.forEach(item=>{
+      const el = document.createElement('div');
+      const isActive = (STATE.view==='folder' && item.folder && STATE.folderId===topFolderIdByName(NAV_TO_TREE_NAME[item.id])) ||
+                        (STATE.view===item.id);
+      el.className = 'nav-item' + (isActive?' active':'');
+      let countHtml = '';
+      if(item.folder){
+        const c = countInSubject(item.id);
+        countHtml = `<span class="nav-count">${c}</span>`;
+      } else if(item.id==='favourites'){
+        countHtml = `<span class="nav-count">${DATA.favourites.length}</span>`;
+      } else if(item.id==='revision'){
+        const c = Object.values(DATA.revision).filter(r=>r.marked).length;
+        countHtml = `<span class="nav-count">${c}</span>`;
+      }
+      el.innerHTML = `<span class="nav-ico">${icon(item.ico,17)}</span><span>${item.label}</span>${countHtml}`;
+      el.onclick = ()=>{
+        if(item.folder){
+          const fid = topFolderIdByName(NAV_TO_TREE_NAME[item.id]);
+          navigateToFolder(fid);
+        } else {
+          STATE.view = item.id; STATE.folderId=null;
+          render();
+        }
+        closeMobileSidebar();
+      };
+      g.appendChild(el);
+    });
+    nav.appendChild(g);
+  });
+}
+
+function navigateToFolder(fid){
+  STATE.view = 'folder';
+  STATE.folderId = fid;
+  render();
+}
+function closeMobileSidebar(){ document.getElementById('appShell').classList.remove('mobile-open'); }
+
+/* ---------------------- RENDER: BREADCRUMB ---------------------- */
+function renderBreadcrumb(){
+  const el = document.getElementById('breadcrumb');
+  if(STATE.view === 'folder' && STATE.folderId){
+    const path = findFolder(STATE.folderId);
+    if(path){
+      el.innerHTML = path.map((n,i)=> (i===path.length-1? `<b>${escapeHtml(n.name)}</b>` : `<span class="crumb-link" data-fid="${n.id}" style="cursor:pointer">${escapeHtml(n.name)}</span>`)).join('<span class="sep">/</span>');
+      el.querySelectorAll('.crumb-link').forEach(c=>{
+        c.onclick = ()=> navigateToFolder(c.dataset.fid);
+      });
+      return;
+    }
+  }
+  const titles = {dashboard:'Dashboard', revision:'Revision', favourites:'Favourites', settings:'Settings'};
+  el.innerHTML = `<b>${titles[STATE.view]||''}</b>`;
+}
+
+/* ---------------------- RENDER: MAIN CONTENT ROUTER ---------------------- */
+function render(){
+  renderSidebar();
+  renderBreadcrumb();
+  const c = document.getElementById('content');
+  if(STATE.view==='dashboard') return renderDashboard(c);
+  if(STATE.view==='folder') return renderFolderView(c);
+  if(STATE.view==='revision') return renderRevisionView(c);
+  if(STATE.view==='favourites') return renderFavouritesView(c);
+  if(STATE.view==='settings') return renderSettingsView(c);
+}
+
+/* ---------------------- DASHBOARD ---------------------- */
+function renderDashboard(c){
+  const lastTouched = r => Math.max(r.updatedAt||0, r.openedAt||0);
+  const allResources = Object.values(DATA.resources).sort((a,b)=>lastTouched(b)-lastTouched(a));
+  const recent = allResources.slice(0,6);
+  const revisionDue = Object.entries(DATA.revision).filter(([id,r])=>r.marked).map(([id])=>DATA.resources[id]).filter(Boolean).slice(0,6);
+  const favs = DATA.favourites.map(id=>DATA.resources[id]).filter(Boolean).slice(0,5);
+
+  const subjectCounts = ['Physics','Chemistry','Botany','Zoology'].map(name=>{
+    const fid = topFolderIdByName(name);
+    return {name, count: fid ? resourcesInFolder(fid,true).length : 0};
+  });
+  const totalResources = Object.keys(DATA.resources).length;
+  const daysSinceExport = SETTINGS.lastExportAt ? Math.floor((Date.now()-SETTINGS.lastExportAt)/86400000) : null;
+  const showBackupBanner = totalResources>0 && !bannerDismissedThisSession && (daysSinceExport===null || daysSinceExport>=14);
+
+  c.innerHTML = `
+    <div class="page-header">
+      <div>
+        <div class="page-title">Your library, at a glance</div>
+        <div class="page-sub">${totalResources} resource${totalResources===1?'':'s'} organised across your NEET library</div>
+      </div>
+    </div>
+    ${showBackupBanner ? `
+    <div class="notice-box warn" id="backupBanner" style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
+      <span style="flex:1;">${daysSinceExport===null ? "You haven't exported a backup yet." : `It's been ${daysSinceExport} days since your last backup.`} Your library only lives in this browser — export a copy so nothing is at risk.</span>
+      <button class="btn btn-sm btn-primary" id="backupNowBtn">Back up now</button>
+      <button class="btn btn-sm btn-ghost" id="dismissBackupBtn">Dismiss</button>
+    </div>` : ''}
+    <div class="dash-grid">
+      <div class="dash-col">
+        <div class="panel">
+          <div class="panel-title">Quick access</div>
+          <div class="quick-grid" id="quickGrid"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-title">Recently added or opened <a id="dashSeeRecent">See all</a></div>
+          <div id="recentList"></div>
+        </div>
+      </div>
+      <div class="dash-col">
+        <div class="panel">
+          <div class="panel-title">Library at a glance</div>
+          <div class="stat-grid">
+            ${subjectCounts.map(s=>`<div class="stat-tile"><div class="stat-num">${s.count}</div><div class="stat-lbl">${s.name}</div></div>`).join('')}
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-title">Marked for revision <a data-goto="revision">See all</a></div>
+          <div id="revisionDueList"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-title">Favourites <a data-goto="favourites">See all</a></div>
+          <div id="favList"></div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  const quickItems = [
+    {label:'NCERT', ico:'ncert', nav:'ncert'},
+    {label:'Physics', ico:'physics', nav:'physics'},
+    {label:'Chemistry', ico:'chemistry', nav:'chemistry'},
+    {label:'Botany', ico:'botany', nav:'botany'},
+    {label:'Zoology', ico:'zoology', nav:'zoology'},
+    {label:'Mind Maps', ico:'mindmap', nav:'mindmaps'},
+    {label:'Revision', ico:'revision', nav:'revision'},
+    {label:'Strategies', ico:'strategy', nav:'strategies'},
+  ];
+  const qg = document.getElementById('quickGrid');
+  qg.innerHTML = quickItems.map(q=>`<div class="quick-tile" data-nav="${q.nav}">${icon(q.ico,18)}<div class="quick-tile-lbl">${q.label}</div></div>`).join('');
+  qg.querySelectorAll('.quick-tile').forEach(t=>{
+    t.onclick = ()=>{
+      const navId = t.dataset.nav;
+      if(NAV_TO_TREE_NAME[navId]) navigateToFolder(topFolderIdByName(NAV_TO_TREE_NAME[navId]));
+      else { STATE.view=navId; STATE.folderId=null; render(); }
+    };
+  });
+
+  renderListRows('recentList', recent, r=>timeAgo(lastTouched(r)));
+  renderListRows('revisionDueList', revisionDue, ()=>'marked');
+  renderListRows('favList', favs, ()=>'');
+
+  document.getElementById('dashSeeRecent').onclick = ()=> openSearch();
+  if(showBackupBanner){
+    document.getElementById('backupNowBtn').onclick = exportLibrary;
+    document.getElementById('dismissBackupBtn').onclick = ()=>{ bannerDismissedThisSession=true; renderDashboard(c); };
+  }
+  c.querySelectorAll('[data-goto]').forEach(a=> a.onclick = ()=>{ STATE.view=a.dataset.goto; STATE.folderId=null; render(); });
+
+  if(recent.length===0 && totalResources===0){
+    document.getElementById('recentList').innerHTML = `<div class="empty-state" style="padding:24px 10px;"><h3>Your library is empty</h3><p>Add your first resource — a PDF, an image, a link, or a note file — to get started.</p></div>`;
+  }
+}
+function renderListRows(elId, items, subFn){
+  const el = document.getElementById(elId);
+  if(items.length===0){ el.innerHTML = `<div class="small-note" style="padding:8px 0;">Nothing here yet.</div>`; return; }
+  el.innerHTML = items.map(r=>{
+    const tm = typeMeta(r.type);
+    return `<div class="list-row" data-id="${r.id}">
+      <div class="list-row-ico">${icon(tm.ico,13)}</div>
+      <div class="list-row-name">${escapeHtml(r.name)}</div>
+      <div class="list-row-sub">${escapeHtml(subFn(r))}</div>
+    </div>`;
+  }).join('');
+  el.querySelectorAll('.list-row').forEach(row=>{
+    row.onclick = ()=> openResource(DATA.resources[row.dataset.id]);
+  });
+}
+
+/* ---------------------- FOLDER VIEW ---------------------- */
+function renderFolderView(c){
+  const folder = folderById(STATE.folderId);
+  if(!folder){ STATE.view='dashboard'; return renderDashboard(c); }
+  const subFolders = folder.children || [];
+  const directResources = resourcesInFolder(folder.id, false).sort((a,b)=>b.updatedAt-a.updatedAt);
+
+  c.innerHTML = `
+    <div class="page-header">
+      <div>
+        <div class="page-title">${escapeHtml(folder.name)}</div>
+        <div class="page-sub">${subFolders.length} folder${subFolders.length===1?'':'s'} · ${directResources.length} resource${directResources.length===1?'':'s'} here</div>
+      </div>
+      <div class="page-actions">
+        <button class="btn btn-sm" id="newFolderBtn">${icon('folder',14)} New folder</button>
+        <button class="btn btn-sm" id="folderImportFolderBtn">${icon('upload',14)} Import folder</button>
+        <button class="btn btn-primary btn-sm" id="folderAddResourceBtn">${icon('plus',14)} Add resource</button>
+      </div>
+    </div>
+    ${subFolders.length ? `<div class="section-label">Folders</div><div class="folder-grid" id="subfolderGrid"></div>` : ''}
+    <div class="section-label">Resources</div>
+    <div id="resourceArea"></div>
+  `;
+
+  if(subFolders.length){
+    const grid = document.getElementById('subfolderGrid');
+    grid.innerHTML = subFolders.map(f=>{
+      const count = resourcesInFolder(f.id, true).length;
+      const menuBtn = f.custom ? `<button class="rc-mini-btn folder-menu-trigger" data-fid="${f.id}" style="position:absolute; top:10px; right:10px; padding:2px 7px;">⋮</button>` : '';
+      return `<div class="folder-card" data-fid="${f.id}" style="position:relative;">
+        ${menuBtn}
+        <div class="f-ico">${icon('folder',17)}</div>
+        <div><div class="f-name">${escapeHtml(f.name)}</div><div class="f-count">${count} item${count===1?'':'s'}</div></div>
+      </div>`;
+    }).join('');
+    grid.querySelectorAll('.folder-card').forEach(card=>{
+      card.onclick = (e)=>{ if(e.target.closest('.folder-menu-trigger')) return; navigateToFolder(card.dataset.fid); };
+    });
+    grid.querySelectorAll('.folder-menu-trigger').forEach(btn=>{
+      btn.onclick = (e)=>{ e.stopPropagation(); showFolderMenu(e.currentTarget, btn.dataset.fid); };
+    });
+  }
+  // allow rename/delete of the current folder itself if it's custom (not top-level defaults)
+  if(folder.custom){
+    const titleEl = document.querySelector('.page-title');
+    const menuBtn = document.createElement('button');
+    menuBtn.className = 'icon-btn'; menuBtn.style.marginLeft = '10px'; menuBtn.style.display='inline-flex'; menuBtn.style.verticalAlign='middle';
+    menuBtn.innerHTML = '⋮';
+    menuBtn.onclick = (e)=> showFolderMenu(e.currentTarget, folder.id);
+    titleEl.appendChild(menuBtn);
+  }
+
+  const area = document.getElementById('resourceArea');
+  if(directResources.length===0){
+    area.innerHTML = `<div class="empty-state">${icon('folder',34)}<h3>No resources here yet</h3><p>Add a PDF, image, link, or file to this folder to start building your library.</p><button class="btn btn-primary btn-sm" id="emptyAddBtn" style="margin-top:6px;">${icon('plus',14)} Add resource</button></div>`;
+    document.getElementById('emptyAddBtn').onclick = ()=> openResourceModal({folderId:folder.id});
+  } else {
+    area.innerHTML = `<div class="resource-grid" id="resGrid"></div>`;
+    renderResourceGrid('resGrid', directResources);
+  }
+
+  document.getElementById('newFolderBtn').onclick = ()=> openFolderModal(folder.id);
+  document.getElementById('folderAddResourceBtn').onclick = ()=> openResourceModal({folderId:folder.id});
+  document.getElementById('folderImportFolderBtn').onclick = ()=> triggerFolderImport(folder.id);
+}
+
+function renderResourceGrid(elId, resources){
+  const el = document.getElementById(elId);
+  el.innerHTML = resources.map(r=> resourceCardHtml(r)).join('');
+  el.querySelectorAll('.resource-card').forEach(card=>{
+    const r = DATA.resources[card.dataset.id];
+    card.addEventListener('click', (e)=>{
+      if(e.target.closest('.rc-star') || e.target.closest('.rc-mini-btn')) return;
+      openResource(r);
+    });
+    card.querySelector('.rc-star').onclick = (e)=>{ e.stopPropagation(); toggleFavourite(r.id); };
+    const editBtn = card.querySelector('.rc-edit');
+    if(editBtn) editBtn.onclick = (e)=>{ e.stopPropagation(); openResourceModal({resource:r}); };
+    const revBtn = card.querySelector('.rc-rev');
+    if(revBtn) revBtn.onclick = (e)=>{ e.stopPropagation(); toggleRevision(r.id); };
+    const reviseBtn = card.querySelector('.rc-revise');
+    if(reviseBtn) reviseBtn.onclick = (e)=>{ e.stopPropagation(); reviseResource(r.id); };
+  });
+}
+function resourceCardHtml(r){
+  const tm = typeMeta(r.type);
+  const isFav = DATA.favourites.includes(r.id);
+  const revState = DATA.revision[r.id];
+  const isMarked = revState && revState.marked;
+  const revCount = (revState && revState.count) || 0;
+  const refBadge = (tm.kind==='file' && r.fileRef && !r.fileData) ? `<span class="rc-badge-ref" title="Large file — stored as a reference, not embedded">reference</span>` : '';
+  const revBadge = revCount ? `<span>·</span><span title="Times revised">${icon('revision',10)} ${revCount}</span>` : '';
+  return `<div class="resource-card" data-id="${r.id}">
+    <button class="rc-star ${isFav?'active':''}" title="Favourite">${icon(isFav?'starFilled':'star',15)}</button>
+    <div class="rc-top">
+      <div class="rc-ico">${icon(tm.ico,15)}</div>
+      <div class="rc-name">${escapeHtml(r.name)}</div>
+    </div>
+    <div class="rc-meta">
+      <span>${tm.label}</span><span>·</span><span>${timeAgo(r.updatedAt)}</span>${refBadge}${revBadge}
+    </div>
+    ${r.tags && r.tags.length ? `<div class="rc-tags">${r.tags.map(t=>`<span class="tag-chip">${escapeHtml(t)}</span>`).join('')}</div>` : ''}
+    <div class="rc-actions">
+      <button class="rc-mini-btn rc-edit">Edit</button>
+      <button class="rc-mini-btn rc-rev">${isMarked?'Unmark':'Mark revision'}</button>
+      <button class="rc-mini-btn rc-revise" title="Count this as a revision">Revise +1</button>
+    </div>
+  </div>`;
+}
+
+function openResource(r){
+  r.updatedAt = r.updatedAt; // keep updatedAt as edit time
+  r.openedAt = Date.now();
+  scheduleSaveData();
+  const tm = typeMeta(r.type);
+  if(tm.kind==='url'){
+    if(r.url) window.open(r.url, '_blank', 'noopener');
+    else toast('No link saved for this resource', 'other');
+    return;
+  }
+  if(r.type==='image' && r.fileData){
+    openImagePreview(r);
+    return;
+  }
+  // file kind
+  if(r.fileData){
+    // embedded — open in new tab via data URL / blob
+    try{
+      const blob = dataURLtoBlob(r.fileData);
+      const url = URL.createObjectURL(blob);
+      window.open(url, '_blank', 'noopener');
+      setTimeout(()=>URL.revokeObjectURL(url), 60000);
+    }catch(e){
+      toast('Could not open embedded file', 'other');
+    }
+  } else {
+    // reference-only — ask user to locate file
+    openLocateFileFlow(r);
+  }
+}
+function dataURLtoBlob(dataUrl){
+  const [meta, b64] = dataUrl.split(',');
+  const mimeMatch = meta.match(/data:(.*);base64/);
+  const mime = mimeMatch ? mimeMatch[1] : 'application/octet-stream';
+  const bin = atob(b64);
+  const arr = new Uint8Array(bin.length);
+  for(let i=0;i<bin.length;i++) arr[i] = bin.charCodeAt(i);
+  return new Blob([arr], {type:mime});
+}
+function openLocateFileFlow(r){
+  const input = document.getElementById('hiddenFileInput');
+  input.value = '';
+  input.onchange = ()=>{
+    const file = input.files[0];
+    if(!file) return;
+    const url = URL.createObjectURL(file);
+    window.open(url, '_blank', 'noopener');
+    toast('Opened '+file.name);
+  };
+  toast('This file is stored as a reference — pick it from your computer to open it', 'other');
+  input.click();
+}
+
+/* ---------------------- IMAGE PREVIEW (prev / next) ---------------------- */
+let previewState = { list: [], index: -1 };
+function imageResourcesInFolder(folderId){
+  return Object.values(DATA.resources)
+    .filter(r=> r.folderId===folderId && r.type==='image' && r.fileData)
+    .sort((a,b)=>b.updatedAt-a.updatedAt);
+}
+function openImagePreview(r){
+  const siblings = imageResourcesInFolder(r.folderId);
+  const idx = siblings.findIndex(s=>s.id===r.id);
+  previewState = { list: siblings.length ? siblings : [r], index: idx<0 ? 0 : idx };
+  renderPreview();
+  document.getElementById('imagePreviewOverlay').classList.add('open');
+}
+function closeImagePreview(){ document.getElementById('imagePreviewOverlay').classList.remove('open'); }
+function renderPreview(){
+  const r = previewState.list[previewState.index];
+  if(!r) return;
+  document.getElementById('previewName').textContent = r.name;
+  document.getElementById('previewImg').src = r.fileData || '';
+  const isFav = DATA.favourites.includes(r.id);
+  const favBtn = document.getElementById('previewFavBtn');
+  favBtn.innerHTML = icon(isFav?'starFilled':'star',16);
+  favBtn.classList.toggle('active', isFav);
+  document.getElementById('previewPos').textContent = (previewState.index+1)+' / '+previewState.list.length;
+  document.getElementById('previewPrevBtn').disabled = previewState.index<=0;
+  document.getElementById('previewNextBtn').disabled = previewState.index>=previewState.list.length-1;
+  r.openedAt = Date.now();
+  scheduleSaveData();
+}
+document.getElementById('previewPrevBtn').onclick = ()=>{ if(previewState.index>0){ previewState.index--; renderPreview(); } };
+document.getElementById('previewNextBtn').onclick = ()=>{ if(previewState.index<previewState.list.length-1){ previewState.index++; renderPreview(); } };
+document.getElementById('previewCloseBtn').onclick = closeImagePreview;
+document.getElementById('previewFavBtn').onclick = ()=>{
+  const r = previewState.list[previewState.index];
+  if(r){ toggleFavourite(r.id); renderPreview(); }
+};
+document.getElementById('previewOpenBtn').onclick = ()=>{
+  const r = previewState.list[previewState.index];
+  if(r && r.fileData){
+    const blob = dataURLtoBlob(r.fileData);
+    const url = URL.createObjectURL(blob);
+    window.open(url, '_blank', 'noopener');
+    setTimeout(()=>URL.revokeObjectURL(url), 60000);
+  }
+};
+document.getElementById('imagePreviewOverlay').addEventListener('click', (e)=>{ if(e.target.id==='imagePreviewOverlay') closeImagePreview(); });
+document.addEventListener('keydown', (e)=>{
+  if(!document.getElementById('imagePreviewOverlay').classList.contains('open')) return;
+  if(e.key==='ArrowLeft') document.getElementById('previewPrevBtn').click();
+  else if(e.key==='ArrowRight') document.getElementById('previewNextBtn').click();
+  else if(e.key==='Escape') closeImagePreview();
+});
+
+function toggleFavourite(id){
+  const idx = DATA.favourites.indexOf(id);
+  if(idx>=0) DATA.favourites.splice(idx,1); else DATA.favourites.push(id);
+  scheduleSaveData();
+  render();
+}
+function toggleRevision(id){
+  if(!DATA.revision[id]) DATA.revision[id] = {marked:false};
+  DATA.revision[id].marked = !DATA.revision[id].marked;
+  DATA.revision[id].markedAt = Date.now();
+  scheduleSaveData();
+  render();
+}
+function reviseResource(id){
+  if(!DATA.revision[id]) DATA.revision[id] = {marked:false};
+  DATA.revision[id].count = (DATA.revision[id].count||0) + 1;
+  DATA.revision[id].lastRevisedAt = Date.now();
+  scheduleSaveData();
+  render();
+  toast('Revision counted — '+DATA.revision[id].count+' total');
+}
+// Sums revision counts per subject and per folder/chapter, for the Revision tab.
+function computeRevisionStats(){
+  const perSubject = {'Physics':0,'Chemistry':0,'Botany':0,'Zoology':0};
+  const perFolder = {};
+  Object.entries(DATA.revision).forEach(([id, v])=>{
+    const count = v.count||0;
+    if(!count) return;
+    const r = DATA.resources[id];
+    if(!r) return;
+    perFolder[r.folderId] = (perFolder[r.folderId]||0) + count;
+    const path = findFolder(r.folderId);
+    if(path && path.length){
+      const subj = path[0].name;
+      if(Object.prototype.hasOwnProperty.call(perSubject, subj)) perSubject[subj] += count;
+    }
+  });
+  const folderRows = Object.entries(perFolder).map(([fid,count])=>{
+    const path = findFolder(fid);
+    return {
+      fid, count,
+      name: path ? path[path.length-1].name : 'Unknown',
+      pathStr: path ? path.map(p=>p.name).join(' / ') : '',
+    };
+  }).sort((a,b)=>b.count-a.count).slice(0,8);
+  return {perSubject, folderRows};
+}
+
+/* ---------------------- REVISION VIEW ---------------------- */
+function renderRevisionView(c){
+  const marked = Object.entries(DATA.revision).filter(([id,v])=>v.marked).map(([id,v])=>({...DATA.resources[id], _markedAt:v.markedAt})).filter(x=>x && x.id);
+  marked.sort((a,b)=>b._markedAt-a._markedAt);
+  const stats = computeRevisionStats();
+  const subjectNames = Object.keys(stats.perSubject);
+
+  c.innerHTML = `
+    <div class="page-header">
+      <div>
+        <div class="page-title">Revision</div>
+        <div class="page-sub">Resources you've marked to revisit, and how many times you've revised each subject and chapter.</div>
+      </div>
+    </div>
+    <div class="panel" style="margin-bottom:22px;">
+      <div class="panel-title">Revision count by subject</div>
+      <div class="stat-grid">
+        ${subjectNames.map(n=>`<div class="stat-tile"><div class="stat-num">${stats.perSubject[n]}</div><div class="stat-lbl">${n}</div></div>`).join('')}
+      </div>
+    </div>
+    ${stats.folderRows.length ? `
+    <div class="panel" style="margin-bottom:22px;">
+      <div class="panel-title">Most-revised chapters</div>
+      <div id="chapterRevList"></div>
+    </div>` : ''}
+    <div class="section-label">Marked for revision</div>
+    <div id="revArea"></div>
+  `;
+
+  if(stats.folderRows.length){
+    const el = document.getElementById('chapterRevList');
+    el.innerHTML = stats.folderRows.map(row=>`<div class="list-row" data-fid="${row.fid}">
+      <div class="list-row-ico">${icon('revision',13)}</div>
+      <div class="list-row-name">${escapeHtml(row.name)}<div class="small-note">${escapeHtml(row.pathStr)}</div></div>
+      <div class="list-row-sub">${row.count} revision${row.count===1?'':'s'}</div>
+    </div>`).join('');
+    el.querySelectorAll('.list-row').forEach(row=> row.onclick = ()=> navigateToFolder(row.dataset.fid));
+  }
+
+  const area = document.getElementById('revArea');
+  if(marked.length===0){
+    area.innerHTML = `<div class="empty-state">${icon('revision',34)}<h3>Nothing marked for revision</h3><p>Open any resource card's actions and choose "Mark for revision" to add it here. "Revise +1" counts a revision for any resource, marked or not.</p></div>`;
+    return;
+  }
+  area.innerHTML = `<div class="resource-grid" id="resGrid"></div>`;
+  renderResourceGrid('resGrid', marked);
+}
+
+/* ---------------------- FAVOURITES VIEW ---------------------- */
+function renderFavouritesView(c){
+  const favs = DATA.favourites.map(id=>DATA.resources[id]).filter(Boolean).sort((a,b)=>b.updatedAt-a.updatedAt);
+  c.innerHTML = `
+    <div class="page-header">
+      <div>
+        <div class="page-title">Favourites</div>
+        <div class="page-sub">Your starred resources, for quick access.</div>
+      </div>
+    </div>
+    <div id="favArea"></div>
+  `;
+  const area = document.getElementById('favArea');
+  if(favs.length===0){
+    area.innerHTML = `<div class="empty-state">${icon('favourite',34)}<h3>No favourites yet</h3><p>Star any resource to pin it here for quick access.</p></div>`;
+    return;
+  }
+  area.innerHTML = `<div class="resource-grid" id="resGrid"></div>`;
+  renderResourceGrid('resGrid', favs);
+}
+
+/* ---------------------- SETTINGS VIEW ---------------------- */
+function renderSettingsView(c){
+  const totalResources = Object.keys(DATA.resources).length;
+  const embeddedCount = Object.values(DATA.resources).filter(r=>r.fileData).length;
+  const refCount = Object.values(DATA.resources).filter(r=>r.fileRef && !r.fileData).length;
+  c.innerHTML = `
+    <div class="page-header">
+      <div>
+        <div class="page-title">Settings</div>
+        <div class="page-sub">Your preferences are saved automatically.</div>
+      </div>
+    </div>
+    <div class="settings-grid">
+      <div class="settings-section">
+        <h4>Appearance</h4>
+        <div class="settings-row">
+          <div><div class="settings-row-label">Theme</div><div class="settings-row-desc">Choose from dark and light academic palettes.</div></div>
+          <button class="btn btn-sm" id="openThemeFromSettings">Change theme</button>
+        </div>
+        <div class="settings-row">
+          <div><div class="settings-row-label">Density</div><div class="settings-row-desc">Comfortable spacing or a more compact layout.</div></div>
+          <div class="segmented" id="densitySeg">
+            <button data-v="comfortable" class="${SETTINGS.density==='comfortable'?'active':''}">Comfortable</button>
+            <button data-v="compact" class="${SETTINGS.density==='compact'?'active':''}">Compact</button>
+          </div>
+        </div>
+        <div class="settings-row">
+          <div><div class="settings-row-label">Sidebar</div><div class="settings-row-desc">Start with the sidebar collapsed.</div></div>
+          <div class="toggle ${SETTINGS.sidebarCollapsed?'on':''}" id="sidebarToggle"></div>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <h4>Library</h4>
+        <div class="settings-row">
+          <div><div class="settings-row-label">Default sorting</div><div class="settings-row-desc">How resources are ordered by default.</div></div>
+          <div class="segmented" id="sortSeg">
+            <button data-v="recent" class="${SETTINGS.defaultSort==='recent'?'active':''}">Recent</button>
+            <button data-v="name" class="${SETTINGS.defaultSort==='name'?'active':''}">Name</button>
+          </div>
+        </div>
+        <div class="settings-row">
+          <div><div class="settings-row-label">Confirm before deleting</div><div class="settings-row-desc">Ask for confirmation on destructive actions.</div></div>
+          <div class="toggle ${SETTINGS.confirmDestructive?'on':''}" id="confirmToggle"></div>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <h4>Data</h4>
+        <div class="settings-row">
+          <div><div class="settings-row-label">Export library</div><div class="settings-row-desc">Download a full backup as a JSON file.</div></div>
+          <button class="btn btn-sm" id="exportBtn">${icon('download',14)} Export</button>
+        </div>
+        <div class="settings-row">
+          <div><div class="settings-row-label">Import library</div><div class="settings-row-desc">Restore from a backup file. Existing data is never silently overwritten.</div></div>
+          <button class="btn btn-sm" id="importBtn">${icon('upload',14)} Import</button>
+        </div>
+        <div class="settings-row">
+          <div><div class="settings-row-label">Reset library</div><div class="settings-row-desc">Permanently clear all folders, resources, and settings.</div></div>
+          <button class="btn btn-sm btn-danger" id="resetBtn">${icon('trash',14)} Clear library</button>
+        </div>
+        <div class="notice-box" style="margin-top:8px;">
+          ${totalResources} resource${totalResources===1?'':'s'} total — ${embeddedCount} stored fully in your library, ${refCount} kept as file references (re-select from disk to open).<br>
+          Last backup: ${SETTINGS.lastExportAt ? timeAgo(SETTINGS.lastExportAt) : 'never yet'}.
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <h4>About</h4>
+        <div class="settings-row"><div class="settings-row-label">App version</div><div class="small-note">NEET Library · v1.0</div></div>
+        <div class="settings-row" id="storageInfoRow"><div class="settings-row-label">Storage</div><div class="small-note">Saved automatically in this browser's local database (IndexedDB) — it stays on this Mac even after you close the tab or quit. Export a backup if you switch browsers or computers.</div></div>
+      </div>
+    </div>
+    <input type="file" id="importFileInput" accept=".json" class="hidden" />
+  `;
+
+  document.getElementById('openThemeFromSettings').onclick = openThemeModal;
+  document.getElementById('densitySeg').querySelectorAll('button').forEach(b=> b.onclick = ()=>{ setDensity(b.dataset.v); renderSettingsView(c); });
+  document.getElementById('sortSeg').querySelectorAll('button').forEach(b=> b.onclick = ()=>{ SETTINGS.defaultSort=b.dataset.v; scheduleSaveSettings(); renderSettingsView(c); });
+  document.getElementById('sidebarToggle').onclick = ()=>{ SETTINGS.sidebarCollapsed=!SETTINGS.sidebarCollapsed; applySidebarCollapsed(); scheduleSaveSettings(); renderSettingsView(c); };
+  document.getElementById('confirmToggle').onclick = ()=>{ SETTINGS.confirmDestructive=!SETTINGS.confirmDestructive; scheduleSaveSettings(); renderSettingsView(c); };
+  document.getElementById('exportBtn').onclick = exportLibrary;
+  document.getElementById('importBtn').onclick = ()=> document.getElementById('importFileInput').click();
+  document.getElementById('importFileInput').onchange = handleImportFile;
+  document.getElementById('resetBtn').onclick = ()=> confirmAction('Clear entire library?', 'This permanently deletes all folders, resources, favourites, and revision marks. This cannot be undone.', resetLibrary);
+}
+function setDensity(v){ SETTINGS.density=v; document.body.setAttribute('data-density', v); scheduleSaveSettings(); }
+function applySidebarCollapsed(){
+  document.getElementById('appShell').classList.toggle('collapsed', SETTINGS.sidebarCollapsed);
+}
+function resetLibrary(){
+  DATA = defaultData();
+  scheduleSaveData();
+  STATE = {view:'dashboard', folderId:null};
+  render();
+  toast('Library cleared');
+}
+
+/* ---------------------- EXPORT / IMPORT ---------------------- */
+function exportLibrary(){
+  const payload = {
+    exportedAt: new Date().toISOString(),
+    schemaVersion: SCHEMA_VERSION,
+    app: 'neet-library',
+    data: DATA,
+    settings: SETTINGS,
+  };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const dateStr = new Date().toISOString().slice(0,10);
+  a.href = url; a.download = `neet-library-backup-${dateStr}.json`;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url), 5000);
+  SETTINGS.lastExportAt = Date.now();
+  scheduleSaveSettings();
+  toast('Library exported');
+  if(STATE.view==='dashboard') render();
+  else if(STATE.view==='settings') renderSettingsView(document.getElementById('content'));
+}
+function handleImportFile(e){
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ()=>{
+    let parsed;
+    try{ parsed = JSON.parse(reader.result); }
+    catch(err){ toast('This file is not a valid backup (invalid JSON)', 'other'); return; }
+    if(!parsed || parsed.app !== 'neet-library' || !parsed.data || !parsed.data.resources){
+      toast('This file does not look like a NEET Library backup', 'other'); return;
+    }
+    showImportChoice(parsed);
+  };
+  reader.readAsText(file);
+  e.target.value = '';
+}
+function showImportChoice(parsed){
+  const incomingCount = Object.keys(parsed.data.resources||{}).length;
+  const currentCount = Object.keys(DATA.resources).length;
+  document.getElementById('confirmTitle').textContent = 'Import backup';
+  document.getElementById('confirmBody').innerHTML =
+    `This backup has ${incomingCount} resource(s), exported ${parsed.exportedAt ? new Date(parsed.exportedAt).toLocaleDateString() : 'previously'}.<br><br>`+
+    `Your current library has ${currentCount} resource(s). Choose how to proceed:`;
+  const okBtn = document.getElementById('confirmOkBtn');
+  const cancelBtn = document.getElementById('confirmCancelBtn');
+  okBtn.textContent = 'Merge (keep both)';
+  okBtn.className = 'btn btn-primary';
+  // add a second custom action via a temporary extra button
+  let replaceBtn = document.getElementById('importReplaceBtn');
+  if(!replaceBtn){
+    replaceBtn = document.createElement('button');
+    replaceBtn.id = 'importReplaceBtn';
+    replaceBtn.className = 'btn btn-danger';
+    replaceBtn.textContent = 'Replace everything';
+    okBtn.parentElement.insertBefore(replaceBtn, okBtn);
+  }
+  replaceBtn.classList.remove('hidden');
+  const overlay = document.getElementById('confirmModalOverlay');
+  overlay.classList.add('open');
+  function cleanup(){
+    overlay.classList.remove('open');
+    replaceBtn.classList.add('hidden');
+    okBtn.onclick=null; cancelBtn.onclick=null; replaceBtn.onclick=null;
+  }
+  cancelBtn.onclick = cleanup;
+  okBtn.onclick = ()=>{ mergeImport(parsed); cleanup(); };
+  replaceBtn.onclick = ()=>{ replaceImport(parsed); cleanup(); };
+}
+function mergeImport(parsed){
+  // merge resources by id, skip duplicates; merge tree by name at top level, add new subfolders
+  const incoming = parsed.data;
+  let added = 0;
+  Object.entries(incoming.resources||{}).forEach(([id,res])=>{
+    if(!DATA.resources[id]){ DATA.resources[id] = res; added++; }
+  });
+  mergeTree(DATA.tree, incoming.tree||[]);
+  (incoming.favourites||[]).forEach(id=>{ if(DATA.resources[id] && !DATA.favourites.includes(id)) DATA.favourites.push(id); });
+  Object.entries(incoming.revision||{}).forEach(([id,v])=>{ if(DATA.resources[id] && !DATA.revision[id]) DATA.revision[id]=v; });
+  scheduleSaveData();
+  render();
+  toast(`Merged — added ${added} new resource(s)`);
+}
+function mergeTree(existing, incoming){
+  incoming.forEach(inNode=>{
+    let match = existing.find(n=>n.name.toLowerCase()===inNode.name.toLowerCase());
+    if(!match){
+      existing.push(inNode);
+    } else {
+      match.children = match.children||[];
+      mergeTree(match.children, inNode.children||[]);
+    }
+  });
+}
+function replaceImport(parsed){
+  DATA = parsed.data;
+  if(!DATA.version) DATA.version = SCHEMA_VERSION;
+  if(parsed.settings) SETTINGS = parsed.settings;
+  scheduleSaveData(); scheduleSaveSettings();
+  applyTheme(SETTINGS.theme); applySidebarCollapsed(); document.body.setAttribute('data-density', SETTINGS.density);
+  render();
+  toast('Library replaced from backup');
+}
+
+/* ---------------------- CONFIRM MODAL (generic) ---------------------- */
+let confirmCallback = null;
+function confirmAction(title, body, onConfirm){
+  if(!SETTINGS.confirmDestructive){ onConfirm(); return; }
+  document.getElementById('confirmTitle').textContent = title;
+  document.getElementById('confirmBody').textContent = body;
+  document.getElementById('importReplaceBtn') && document.getElementById('importReplaceBtn').classList.add('hidden');
+  document.getElementById('confirmOkBtn').textContent = 'Confirm';
+  document.getElementById('confirmOkBtn').className = 'btn btn-danger';
+  confirmCallback = onConfirm;
+  document.getElementById('confirmModalOverlay').classList.add('open');
+}
+document.getElementById('confirmOkBtn').addEventListener('click', ()=>{
+  document.getElementById('confirmModalOverlay').classList.remove('open');
+  if(confirmCallback){ confirmCallback(); confirmCallback=null; }
+});
+document.getElementById('confirmCancelBtn').addEventListener('click', ()=>{
+  document.getElementById('confirmModalOverlay').classList.remove('open');
+  confirmCallback = null;
+});
+
+/* ---------------------- RESOURCE MODAL ---------------------- */
+let rfState = { type:'pdf', folderId:null, tags:[], fileData:null, fileRef:null, editingId:null };
+const FILE_EMBED_LIMIT = 3 * 1024 * 1024; // 3MB
+
+function openResourceModal({folderId=null, resource=null}={}){
+  rfState = { type: resource?resource.type:'pdf', folderId: resource?resource.folderId:folderId, tags: resource?[...resource.tags]:[], fileData: resource?resource.fileData:null, fileRef: resource?resource.fileRef:null, editingId: resource?resource.id:null };
+  document.getElementById('resourceModalTitle').textContent = resource? 'Edit resource' : 'Add resource';
+  document.getElementById('rf-name').value = resource? resource.name : '';
+  document.getElementById('rf-url').value = resource? (resource.url||'') : '';
+  document.getElementById('rf-notes').value = resource? (resource.notes||'') : '';
+  document.getElementById('rf-filename').textContent = rfState.fileRef ? rfState.fileRef.name : 'No file chosen — or drag one here';
+  document.getElementById('rf-delete-btn').classList.toggle('hidden', !resource);
+  renderTypeGrid();
+  renderSourceField();
+  renderFolderTree();
+  renderTagChips();
+  document.getElementById('resourceModalOverlay').classList.add('open');
+  document.getElementById('rf-name').focus();
+}
+function closeResourceModal(){ document.getElementById('resourceModalOverlay').classList.remove('open'); }
+
+function renderTypeGrid(){
+  const grid = document.getElementById('rf-type-grid');
+  grid.innerHTML = RESOURCE_TYPES.map(t=>`<div class="type-opt ${rfState.type===t.id?'selected':''}" data-t="${t.id}">${icon(t.ico,15)}<span>${t.label}</span></div>`).join('');
+  grid.querySelectorAll('.type-opt').forEach(el=>{
+    el.onclick = ()=>{ rfState.type = el.dataset.t; renderTypeGrid(); renderSourceField(); };
+  });
+}
+function renderSourceField(){
+  const tm = typeMeta(rfState.type);
+  const label = document.getElementById('rf-source-label');
+  const urlInput = document.getElementById('rf-url');
+  const filepickRow = document.getElementById('rf-filepick-row');
+  const notice = document.getElementById('rf-file-notice');
+  const importHint = document.getElementById('rf-import-folder-hint');
+  if(tm.kind==='url'){
+    label.textContent = rfState.type==='video' ? 'Video link (URL)' : 'Link (URL)';
+    urlInput.classList.remove('hidden'); urlInput.parentElement.querySelector('label').classList.remove('hidden');
+    filepickRow.classList.add('hidden');
+    notice.classList.add('hidden');
+    importHint.classList.add('hidden');
+  } else {
+    label.textContent = 'File';
+    urlInput.classList.add('hidden');
+    filepickRow.classList.remove('hidden');
+    importHint.classList.remove('hidden');
+    if(rfState.fileData){
+      notice.classList.remove('hidden'); notice.classList.remove('warn');
+      notice.textContent = 'This file will be stored fully inside your library and always opens with one click.';
+    } else if(rfState.fileRef){
+      notice.classList.remove('hidden'); notice.classList.add('warn');
+      notice.textContent = `"${rfState.fileRef.name}" (${bytesToSize(rfState.fileRef.size)}) is larger than 3MB, so it's kept as a reference — you'll pick it from your computer again when you open it.`;
+    } else {
+      notice.classList.add('hidden');
+    }
+  }
+}
+function handleChosenFile(file){
+  if(!file) return;
+  document.getElementById('rf-filename').textContent = file.name;
+  rfState.fileRef = {name:file.name, size:file.size, type:file.type};
+  if(file.size <= FILE_EMBED_LIMIT){
+    const reader = new FileReader();
+    reader.onload = ()=>{ rfState.fileData = reader.result; renderSourceField(); };
+    reader.readAsDataURL(file);
+  } else {
+    rfState.fileData = null;
+    renderSourceField();
+  }
+  if(!document.getElementById('rf-name').value) document.getElementById('rf-name').value = file.name.replace(/\.[^.]+$/,'');
+}
+document.getElementById('rf-filepick-btn').onclick = ()=>{
+  const input = document.getElementById('hiddenFileInput');
+  input.value = '';
+  input.onchange = ()=> handleChosenFile(input.files[0]);
+  input.click();
+};
+// drag-and-drop support onto the file picker area
+const rfFilepickRow = document.getElementById('rf-filepick-row');
+['dragenter','dragover'].forEach(evt=>{
+  rfFilepickRow.addEventListener(evt, (e)=>{ e.preventDefault(); e.stopPropagation(); rfFilepickRow.style.borderColor='var(--accent)'; rfFilepickRow.style.background='var(--surface-hover)'; });
+});
+['dragleave','drop'].forEach(evt=>{
+  rfFilepickRow.addEventListener(evt, (e)=>{ e.preventDefault(); e.stopPropagation(); rfFilepickRow.style.borderColor=''; rfFilepickRow.style.background=''; });
+});
+rfFilepickRow.addEventListener('drop', (e)=>{
+  const file = e.dataTransfer.files && e.dataTransfer.files[0];
+  if(file) handleChosenFile(file);
+});
+function renderFolderTree(){
+  const el = document.getElementById('rf-folder-tree');
+  const rows = [];
+  function walk(nodes, depth){
+    nodes.forEach(n=>{
+      rows.push({id:n.id, name:n.name, depth});
+      if(n.children) walk(n.children, depth+1);
+    });
+  }
+  walk(DATA.tree, 0);
+  el.innerHTML = rows.map(r=>`<div class="folder-select-item depth-${Math.min(r.depth,2)} ${rfState.folderId===r.id?'selected':''}" data-fid="${r.id}">${escapeHtml(r.name)}</div>`).join('');
+  el.querySelectorAll('.folder-select-item').forEach(item=>{
+    item.onclick = ()=>{ rfState.folderId = item.dataset.fid; renderFolderTree(); };
+  });
+}
+function renderTagChips(){
+  const row = document.getElementById('rf-tag-row');
+  const input = document.getElementById('rf-tag-input');
+  row.querySelectorAll('.tag-chip').forEach(c=>c.remove());
+  rfState.tags.forEach((t,i)=>{
+    const chip = document.createElement('span');
+    chip.className = 'tag-chip removable';
+    chip.innerHTML = `${escapeHtml(t)}<button data-i="${i}">×</button>`;
+    row.insertBefore(chip, input);
+  });
+  row.querySelectorAll('button').forEach(b=> b.onclick = ()=>{ rfState.tags.splice(+b.dataset.i,1); renderTagChips(); });
+}
+document.getElementById('rf-tag-input').addEventListener('keydown', (e)=>{
+  if(e.key==='Enter' && e.target.value.trim()){
+    e.preventDefault();
+    rfState.tags.push(e.target.value.trim());
+    e.target.value='';
+    renderTagChips();
+  }
+});
+document.getElementById('rf-save-btn').onclick = ()=>{
+  const name = document.getElementById('rf-name').value.trim();
+  if(!name){ toast('Please enter a name', 'other'); return; }
+  if(!rfState.folderId){ toast('Please choose a folder', 'other'); return; }
+  const tm = typeMeta(rfState.type);
+  const url = document.getElementById('rf-url').value.trim();
+  if(tm.kind==='url' && !url){ toast('Please enter a link', 'other'); return; }
+  const notes = document.getElementById('rf-notes').value.trim();
+  const now = Date.now();
+  if(rfState.editingId){
+    const r = DATA.resources[rfState.editingId];
+    Object.assign(r, {
+      name, type: rfState.type, folderId: rfState.folderId, tags:[...rfState.tags], notes,
+      url: tm.kind==='url'? url : null,
+      fileData: tm.kind==='file'? rfState.fileData : null,
+      fileRef: tm.kind==='file'? rfState.fileRef : null,
+      updatedAt: now,
+    });
+  } else {
+    const id = uid();
+    DATA.resources[id] = {
+      id, name, type: rfState.type, folderId: rfState.folderId, tags:[...rfState.tags], notes,
+      url: tm.kind==='url'? url : null,
+      fileData: tm.kind==='file'? rfState.fileData : null,
+      fileRef: tm.kind==='file'? rfState.fileRef : null,
+      createdAt: now, updatedAt: now, openedAt: null,
+    };
+  }
+  scheduleSaveData();
+  closeResourceModal();
+  render();
+  toast(rfState.editingId ? 'Resource updated' : 'Resource added');
+};
+document.getElementById('rf-delete-btn').onclick = ()=>{
+  confirmAction('Delete this resource?', 'This will remove it from your library permanently.', ()=>{
+    delete DATA.resources[rfState.editingId];
+    DATA.favourites = DATA.favourites.filter(id=>id!==rfState.editingId);
+    delete DATA.revision[rfState.editingId];
+    scheduleSaveData();
+    closeResourceModal();
+    render();
+    toast('Resource deleted');
+  });
+};
+document.getElementById('rf-cancel-btn').onclick = closeResourceModal;
+document.getElementById('resourceModalClose').onclick = closeResourceModal;
+document.getElementById('addResourceBtn').onclick = ()=> openResourceModal({folderId: STATE.folderId || topFolderIdByName('Physics')});
+document.getElementById('rf-import-folder-hint').onclick = ()=>{
+  const target = rfState.folderId || STATE.folderId || topFolderIdByName('Physics');
+  closeResourceModal();
+  triggerFolderImport(target);
+};
+document.getElementById('importFolderBtn').onclick = ()=> triggerFolderImport(STATE.folderId || topFolderIdByName('Physics'));
+
+/* ---------------------- BULK FOLDER IMPORT ---------------------- */
+function extToType(ext){
+  ext = (ext||'').toLowerCase();
+  if(ext==='pdf') return 'pdf';
+  if(['jpg','jpeg','png','gif','webp','bmp','svg','heic'].includes(ext)) return 'image';
+  if(['html','htm'].includes(ext)) return 'html';
+  if(['md','txt'].includes(ext)) return 'note';
+  if(['doc','docx','rtf','odt','ppt','pptx','xls','xlsx','csv'].includes(ext)) return 'document';
+  return 'other';
+}
+function readFileAsDataURL(file){
+  return new Promise((resolve,reject)=>{
+    const reader = new FileReader();
+    reader.onload = ()=>resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+function ensureSubfolderPath(parentId, segments){
+  let currentId = parentId;
+  segments.forEach(seg=>{
+    if(!seg) return;
+    const parent = folderById(currentId);
+    parent.children = parent.children || [];
+    let match = parent.children.find(c=>c.name.toLowerCase()===seg.toLowerCase());
+    if(!match){
+      match = {id:'f_'+Date.now().toString(36)+Math.random().toString(36).slice(2,6)+Math.random().toString(36).slice(2,4), name:seg, custom:true, children:[]};
+      parent.children.push(match);
+    }
+    currentId = match.id;
+  });
+  return currentId;
+}
+function triggerFolderImport(targetFolderId){
+  const input = document.getElementById('folderImportInput');
+  input.dataset.target = targetFolderId;
+  input.value = '';
+  input.click();
+}
+document.getElementById('folderImportInput').addEventListener('change', async (e)=>{
+  const targetFolderId = e.target.dataset.target;
+  const files = Array.from(e.target.files).filter(f=> f.name && !f.name.startsWith('.') && f.name.toLowerCase()!=='thumbs.db');
+  e.target.value = '';
+  if(files.length===0){ toast('No usable files found in that folder', 'other'); return; }
+  toast(`Importing ${files.length} file(s)…`, 'download');
+  let embedded=0, referenced=0;
+  const now0 = Date.now();
+  for(const file of files){
+    const relPath = file.webkitRelativePath || file.name;
+    const parts = relPath.split('/');
+    parts.pop();       // drop filename
+    parts.shift();     // drop the top-level selected folder's own name
+    const destFolderId = parts.length ? ensureSubfolderPath(targetFolderId, parts) : targetFolderId;
+    const type = extToType(file.name.split('.').pop());
+    let fileData = null, fileRef = null;
+    if(file.size <= FILE_EMBED_LIMIT){
+      try{ fileData = await readFileAsDataURL(file); embedded++; }
+      catch(e){ fileRef = {name:file.name, size:file.size, type:file.type}; referenced++; }
+    } else {
+      fileRef = {name:file.name, size:file.size, type:file.type};
+      referenced++;
+    }
+    const id = uid();
+    const now = Date.now();
+    DATA.resources[id] = {
+      id, name: file.name.replace(/\.[^.]+$/,''), type, folderId: destFolderId, tags: [], notes:'',
+      url: null, fileData, fileRef,
+      createdAt: now, updatedAt: now, openedAt: null,
+    };
+  }
+  scheduleSaveData();
+  render();
+  toast(`Imported ${files.length} file(s) — ${embedded} stored fully, ${referenced} kept as references`, 'check');
+});
+
+/* ---------------------- FOLDER MODAL (create + rename) ---------------------- */
+let ffParentId = null;
+let ffMode = 'create'; // 'create' | 'rename'
+let ffRenameId = null;
+function openFolderModal(parentId){
+  ffMode = 'create'; ffParentId = parentId; ffRenameId = null;
+  const parent = folderById(parentId);
+  document.getElementById('ff-title').textContent = 'New folder';
+  document.getElementById('ff-save-btn').textContent = 'Create folder';
+  document.getElementById('ff-delete-btn').classList.add('hidden');
+  document.getElementById('ff-name').value = '';
+  document.getElementById('ff-location').textContent = 'Inside: ' + parent.name;
+  document.getElementById('folderModalOverlay').classList.add('open');
+  document.getElementById('ff-name').focus();
+}
+function openRenameFolderModal(folderId){
+  ffMode = 'rename'; ffRenameId = folderId;
+  const f = folderById(folderId);
+  document.getElementById('ff-title').textContent = 'Rename folder';
+  document.getElementById('ff-save-btn').textContent = 'Save name';
+  document.getElementById('ff-delete-btn').classList.remove('hidden');
+  document.getElementById('ff-name').value = f.name;
+  document.getElementById('ff-location').textContent = '';
+  document.getElementById('folderModalOverlay').classList.add('open');
+  document.getElementById('ff-name').focus();
+  document.getElementById('ff-name').select();
+}
+document.getElementById('ff-save-btn').onclick = ()=>{
+  const name = document.getElementById('ff-name').value.trim();
+  if(!name) return;
+  if(ffMode==='create'){
+    const parent = folderById(ffParentId);
+    parent.children = parent.children || [];
+    parent.children.push({id:'f_'+Date.now().toString(36)+Math.random().toString(36).slice(2,6), name, custom:true, children:[]});
+    toast('Folder created');
+  } else {
+    folderById(ffRenameId).name = name;
+    toast('Folder renamed');
+  }
+  scheduleSaveData();
+  document.getElementById('folderModalOverlay').classList.remove('open');
+  render();
+};
+document.getElementById('ff-delete-btn').onclick = ()=>{
+  const f = folderById(ffRenameId);
+  const idsUnder = allFolderIdsUnder(ffRenameId);
+  const resourceCount = Object.values(DATA.resources).filter(r=>idsUnder.includes(r.folderId)).length;
+  const body = resourceCount>0
+    ? `"${f.name}" contains ${resourceCount} resource(s). Deleting it will permanently remove them too. This cannot be undone.`
+    : `Delete the empty folder "${f.name}"? This cannot be undone.`;
+  confirmAction('Delete folder?', body, ()=>{
+    deleteFolder(ffRenameId);
+    document.getElementById('folderModalOverlay').classList.remove('open');
+    toast('Folder deleted');
+  });
+};
+document.getElementById('ff-cancel-btn').onclick = ()=> document.getElementById('folderModalOverlay').classList.remove('open');
+document.getElementById('folderModalClose').onclick = ()=> document.getElementById('folderModalOverlay').classList.remove('open');
+
+function deleteFolder(folderId){
+  const idsUnder = new Set(allFolderIdsUnder(folderId));
+  // remove resources under this folder tree
+  Object.keys(DATA.resources).forEach(rid=>{
+    if(idsUnder.has(DATA.resources[rid].folderId)){
+      delete DATA.resources[rid];
+      DATA.favourites = DATA.favourites.filter(id=>id!==rid);
+      delete DATA.revision[rid];
+    }
+  });
+  // remove the folder node from its parent's children (or top-level tree)
+  function removeFrom(nodes){
+    const idx = nodes.findIndex(n=>n.id===folderId);
+    if(idx>=0){ nodes.splice(idx,1); return true; }
+    for(const n of nodes){ if(n.children && removeFrom(n.children)) return true; }
+    return false;
+  }
+  removeFrom(DATA.tree);
+  scheduleSaveData();
+  if(STATE.folderId===folderId || (idsUnder.has(STATE.folderId))){ STATE.view='dashboard'; STATE.folderId=null; }
+  render();
+}
+
+/* ---------------------- FOLDER CONTEXT MENU ---------------------- */
+function showFolderMenu(anchorEl, folderId){
+  const menu = document.getElementById('folderMenu');
+  const rect = anchorEl.getBoundingClientRect();
+  menu.style.top = (rect.bottom+6) + 'px';
+  menu.style.left = Math.min(rect.left, window.innerWidth-170) + 'px';
+  menu.classList.remove('hidden');
+  const items = menu.querySelectorAll('.folder-menu-item');
+  items[0].onclick = ()=>{ hideFolderMenu(); openRenameFolderModal(folderId); };
+  items[1].onclick = ()=>{
+    hideFolderMenu();
+    const f = folderById(folderId);
+    const idsUnder = allFolderIdsUnder(folderId);
+    const resourceCount = Object.values(DATA.resources).filter(r=>idsUnder.includes(r.folderId)).length;
+    const body = resourceCount>0
+      ? `"${f.name}" contains ${resourceCount} resource(s). Deleting it will permanently remove them too. This cannot be undone.`
+      : `Delete the empty folder "${f.name}"? This cannot be undone.`;
+    confirmAction('Delete folder?', body, ()=>{ deleteFolder(folderId); toast('Folder deleted'); });
+  };
+  setTimeout(()=>{ document.addEventListener('click', hideFolderMenuOnce); }, 0);
+}
+function hideFolderMenu(){ document.getElementById('folderMenu').classList.add('hidden'); }
+function hideFolderMenuOnce(e){
+  const menu = document.getElementById('folderMenu');
+  if(!menu.contains(e.target)){ hideFolderMenu(); document.removeEventListener('click', hideFolderMenuOnce); }
+}
+
+/* ---------------------- THEME MODAL ---------------------- */
+function openThemeModal(){
+  const grid = document.getElementById('themeSwatches');
+  function swatchHtml(t){
+    return `<div class="theme-swatch ${SETTINGS.theme===t.id?'selected':''}" data-t="${t.id}">
+      <div class="swatch-preview">${t.colors.map(c=>`<span style="background:${c}"></span>`).join('')}</div>
+      <div class="theme-swatch-name">${t.name}</div>
+    </div>`;
+  }
+  const dark = THEMES.filter(t=>t.mode!=='light');
+  const light = THEMES.filter(t=>t.mode==='light');
+  grid.innerHTML = `
+    <div class="theme-group-label">Dark</div>
+    <div class="theme-swatches-row">${dark.map(swatchHtml).join('')}</div>
+    <div class="theme-group-label">Light</div>
+    <div class="theme-swatches-row">${light.map(swatchHtml).join('')}</div>
+  `;
+  grid.querySelectorAll('.theme-swatch').forEach(el=>{
+    el.onclick = ()=>{ applyTheme(el.dataset.t); SETTINGS.theme=el.dataset.t; scheduleSaveSettings(); openThemeModal(); };
+  });
+  document.getElementById('themeModalOverlay').classList.add('open');
+}
+function applyTheme(themeId){ document.body.setAttribute('data-theme', themeId); }
+document.getElementById('themeBtn').onclick = openThemeModal;
+document.getElementById('themeModalClose').onclick = ()=> document.getElementById('themeModalOverlay').classList.remove('open');
+
+/* ---------------------- SEARCH ---------------------- */
+let searchFilterType = 'all';
+function openSearch(){
+  document.getElementById('searchOverlay').classList.add('open');
+  document.getElementById('searchInput').value='';
+  document.getElementById('searchInput').focus();
+  renderSearchFilters();
+  runSearch('');
+}
+function closeSearch(){ document.getElementById('searchOverlay').classList.remove('open'); }
+function renderSearchFilters(){
+  const filters = ['all','pdf','image','link','video','html','document','formula','note'];
+  const el = document.getElementById('searchFilters');
+  el.innerHTML = filters.map(f=>`<div class="filter-chip ${searchFilterType===f?'active':''}" data-f="${f}">${f==='all'?'All types':typeMeta(f).label}</div>`).join('');
+  el.querySelectorAll('.filter-chip').forEach(c=> c.onclick = ()=>{ searchFilterType = c.dataset.f; renderSearchFilters(); runSearch(document.getElementById('searchInput').value); });
+}
+function runSearch(q){
+  q = q.trim().toLowerCase();
+  let results = Object.values(DATA.resources);
+  if(searchFilterType!=='all') results = results.filter(r=>r.type===searchFilterType);
+  if(q){
+    results = results.filter(r=>{
+      const path = findFolder(r.folderId);
+      const pathStr = path? path.map(p=>p.name).join(' ').toLowerCase() : '';
+      return r.name.toLowerCase().includes(q) ||
+        (r.tags||[]).some(t=>t.toLowerCase().includes(q)) ||
+        pathStr.includes(q) ||
+        (r.notes||'').toLowerCase().includes(q);
+    });
+  }
+  results.sort((a,b)=>b.updatedAt-a.updatedAt);
+  const el = document.getElementById('searchResults');
+  if(results.length===0){
+    el.innerHTML = `<div class="empty-state" style="padding:36px 10px;">${icon('search',26)}<h3>No matches</h3><p>Try a different search term or filter.</p></div>`;
+    return;
+  }
+  el.innerHTML = results.slice(0,60).map(r=>{
+    const tm = typeMeta(r.type);
+    const path = findFolder(r.folderId);
+    const pathStr = path? path.map(p=>p.name).join(' / ') : '';
+    return `<div class="search-result" data-id="${r.id}">
+      <div class="list-row-ico">${icon(tm.ico,13)}</div>
+      <div style="flex:1; min-width:0;">
+        <div class="list-row-name">${escapeHtml(r.name)}</div>
+        <div class="sr-path">${escapeHtml(pathStr)}</div>
+      </div>
+      <div class="list-row-sub">${timeAgo(r.updatedAt)}</div>
+    </div>`;
+  }).join('');
+  el.querySelectorAll('.search-result').forEach(row=>{
+    row.onclick = ()=>{ closeSearch(); openResource(DATA.resources[row.dataset.id]); };
+  });
+}
+document.getElementById('topbarSearch').onclick = openSearch;
+document.getElementById('searchInput').addEventListener('input', (e)=> runSearch(e.target.value));
+document.getElementById('searchOverlay').addEventListener('click', (e)=>{ if(e.target.id==='searchOverlay') closeSearch(); });
+
+/* ---------------------- GLOBAL KEYS ---------------------- */
+document.addEventListener('keydown', (e)=>{
+  const overlayOpen = document.getElementById('searchOverlay').classList.contains('open');
+  const typing = ['INPUT','TEXTAREA'].includes(document.activeElement.tagName);
+  const isCmdK = (e.metaKey || e.ctrlKey) && e.key.toLowerCase()==='k';
+  if(isCmdK){
+    e.preventDefault(); overlayOpen ? closeSearch() : openSearch();
+  } else if(e.key==='/' && !overlayOpen && !typing){
+    e.preventDefault(); openSearch();
+  } else if((e.metaKey||e.ctrlKey) && e.key.toLowerCase()==='n' && !overlayOpen && !typing){
+    e.preventDefault(); openResourceModal({folderId: STATE.folderId || topFolderIdByName('Physics')});
+  } else if(e.key==='Escape'){
+    if(overlayOpen) closeSearch();
+    document.querySelectorAll('.modal-overlay.open').forEach(m=>m.classList.remove('open'));
+  }
+});
+// Mac vs other OS hint in the search bar and shortcut labels
+(function setPlatformHints(){
+  const isMac = /Mac|iPod|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
+  const hint = document.getElementById('searchKbdHint');
+  if(hint) hint.textContent = isMac ? '⌘K' : 'Ctrl K';
+})();
+
+/* ---------------------- SIDEBAR COLLAPSE / MOBILE ---------------------- */
+document.getElementById('collapseBtn').onclick = ()=>{
+  SETTINGS.sidebarCollapsed = !SETTINGS.sidebarCollapsed;
+  applySidebarCollapsed();
+  scheduleSaveSettings();
+};
+document.getElementById('mobileMenuBtn').onclick = ()=>{
+  document.getElementById('appShell').classList.toggle('mobile-open');
+};
+
+/* ---------------------- INIT ---------------------- */
+async function init(){
+  await loadAll();
+  document.body.setAttribute('data-theme', SETTINGS.theme);
+  document.body.setAttribute('data-density', SETTINGS.density);
+  applySidebarCollapsed();
+  render();
+  markSaved();
+}
+init();
+</script>
+</body>
+</html>
