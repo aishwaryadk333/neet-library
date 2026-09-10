@@ -240,6 +240,9 @@ button{ font-family:inherit; }
 .folder-card .f-ico svg{ width:17px; height:17px; }
 .folder-card .f-name{ font-size:13.5px; font-weight:500; }
 .folder-card .f-count{ font-size:11.5px; color:var(--text-faint); }
+.folder-card.is-hidden-folder{ opacity:.55; border-style:dashed; }
+.folder-card.is-hidden-folder:hover{ opacity:.85; }
+.folder-menu-item.disabled{ opacity:.4; cursor:default; pointer-events:none; }
 
 .section-label{ font-size:12px; text-transform:none; color:var(--text-faint); font-weight:500; margin:26px 0 12px 0; letter-spacing:.2px; }
 .section-label:first-child{ margin-top:0; }
@@ -395,6 +398,47 @@ textarea{ resize:vertical; min-height:60px; }
 
 /* ============================= REVISION COUNTS ============================= */
 .rc-meta svg{ width:10px; height:10px; vertical-align:-1px; }
+.rc-revise-group{ display:inline-flex; align-items:center; gap:5px; background:var(--surface-2); border:1px solid var(--border-soft); border-radius:5px; padding:2px 5px; }
+.rc-revise-group button{ background:none; border:none; color:var(--text-dim); font-size:13px; width:16px; height:18px; cursor:pointer; display:flex; align-items:center; justify-content:center; line-height:1; padding:0; }
+.rc-revise-group button:hover{ color:var(--text); }
+.rc-revise-group button:disabled{ opacity:.35; cursor:not-allowed; }
+.rc-revise-count{ font-size:11px; color:var(--text-dim); min-width:12px; text-align:center; }
+
+/* ============================= CHAPTER REVISION LOG ============================= */
+.chapter-add-row{ display:flex; gap:8px; margin-bottom:14px; }
+.chapter-add-row .input{ flex:1; }
+.chapter-row{ border:1px solid var(--border-soft); border-radius:var(--radius-md); padding:12px 14px; margin-bottom:10px; }
+.chapter-row:last-child{ margin-bottom:0; }
+.chapter-row-top{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
+.chapter-name{ font-size:13.5px; font-weight:500; }
+.chapter-meta{ font-size:11.5px; color:var(--text-faint); margin-top:2px; }
+.chapter-log-row{ display:flex; gap:8px; margin-top:10px; align-items:center; }
+.chapter-log-row .input{ width:150px; padding:6px 9px; font-size:12px; }
+.chapter-dates{ display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+.date-chip{ font-size:10.5px; padding:3px 6px 3px 9px; border-radius:20px; background:var(--surface-2); color:var(--text-dim); border:1px solid var(--border-soft); display:inline-flex; align-items:center; gap:5px; }
+.date-chip-remove{ background:none; border:none; color:var(--text-faint); cursor:pointer; font-size:12px; line-height:1; padding:0 2px; }
+.date-chip-remove:hover{ color:var(--danger); }
+.chapter-row.is-completed{ border-color:rgba(127,174,142,.4); background:rgba(127,174,142,.05); }
+.chapter-complete-toggle{ display:flex; align-items:center; gap:6px; font-size:11.5px; color:var(--text-dim); cursor:pointer; padding:4px 9px; border-radius:20px; border:1px solid var(--border); background:var(--surface-2); flex-shrink:0; user-select:none; }
+.chapter-complete-toggle:hover{ border-color:var(--success); }
+.chapter-complete-toggle.on{ background:rgba(127,174,142,.16); border-color:var(--success); color:var(--success); }
+.chapter-complete-toggle .cc-dot{ width:8px; height:8px; border-radius:50%; border:1.5px solid currentColor; flex-shrink:0; }
+.chapter-complete-toggle.on .cc-dot{ background:currentColor; }
+.chapter-revision-locked{ margin-top:10px; font-size:11.5px; color:var(--text-faint); background:var(--surface-2); border:1px dashed var(--border); border-radius:var(--radius-sm); padding:8px 10px; }
+.chapter-progress-line{ font-size:11.5px; color:var(--text-faint); margin:-6px 0 14px 0; }
+.chapter-name{ display:inline-flex; align-items:center; gap:8px; flex-wrap:wrap; }
+.chapter-tick{ width:17px; height:17px; border-radius:5px; border:1.5px solid var(--border); display:inline-flex; align-items:center; justify-content:center; color:transparent; flex-shrink:0; }
+.chapter-tick.on{ background:var(--success); border-color:var(--success); color:var(--accent-contrast); }
+.badge-weak{ font-size:10px; padding:2px 8px; border-radius:20px; background:rgba(193,124,114,.15); color:var(--danger); border:1px solid rgba(193,124,114,.35); font-weight:500; }
+.subtask-row{ display:flex; gap:6px; margin:10px 0 0 0; flex-wrap:wrap; }
+.subtask-chip{ display:flex; align-items:center; gap:5px; font-size:11px; padding:4px 10px; border-radius:20px; border:1px solid var(--border); background:var(--surface-2); color:var(--text-faint); cursor:pointer; user-select:none; transition:all var(--dur-1); }
+.subtask-chip:hover{ border-color:var(--text-dim); color:var(--text-dim); }
+.subtask-chip.on{ background:rgba(127,174,142,.16); border-color:var(--success); color:var(--success); }
+.confidence-row{ display:flex; align-items:center; gap:9px; margin:10px 0 2px 0; font-size:11.5px; color:var(--text-faint); }
+.confidence-dots{ display:flex; gap:5px; }
+.confidence-dot{ width:14px; height:14px; border-radius:50%; border:1.5px solid var(--border); cursor:pointer; background:transparent; transition:all var(--dur-1); }
+.confidence-dot:hover{ border-color:var(--text-dim); }
+.confidence-label{ font-size:11px; font-weight:500; min-width:26px; }
 
 /* ============================= IMAGE PREVIEW ============================= */
 #imagePreviewOverlay{ background:rgba(0,0,0,.85); }
@@ -438,6 +482,37 @@ textarea{ resize:vertical; min-height:60px; }
 .hidden{ display:none !important; }
 .small-note{ font-size:11px; color:var(--text-faint); }
 .pathline{ font-size:11.5px; color:var(--text-faint); margin-top:-14px; margin-bottom:6px; }
+
+/* ============================= PDF VIEWER ============================= */
+.pdf-viewer-overlay{ position:fixed; inset:0; background:var(--bg); z-index:500; display:flex; flex-direction:column; }
+.pdf-toolbar{ display:flex; align-items:center; gap:14px; padding:10px 18px; border-bottom:1px solid var(--border-soft); flex-wrap:wrap; background:var(--surface); flex-shrink:0; }
+.pdf-back-btn{ display:flex; align-items:center; gap:6px; }
+.pdf-title{ font-family:var(--font-display); font-weight:600; font-size:14px; flex:1; min-width:100px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.pdf-toolbar-group{ display:flex; align-items:center; gap:6px; }
+.pdf-page-input{ width:46px; text-align:center; background:var(--surface-2); border:1px solid var(--border); border-radius:6px; color:var(--text); padding:4px; font-size:12px; }
+.pdf-body{ flex:1; display:flex; overflow:hidden; min-height:0; }
+.pdf-page-scroll{ flex:1; overflow:auto; display:flex; justify-content:center; padding:26px; background:#37393c; }
+.pdf-page-stack{ position:relative; box-shadow:0 6px 26px rgba(0,0,0,.55); height:fit-content; }
+.pdf-page-stack canvas{ display:block; }
+.textLayer{ position:absolute; top:0; left:0; overflow:hidden; line-height:1; opacity:1; }
+.textLayer span, .textLayer br{ color:transparent; position:absolute; white-space:pre; cursor:text; transform-origin:0 0; }
+.textLayer ::selection{ background:rgba(80,140,255,.35); }
+.pdf-annotation-layer{ position:absolute; top:0; left:0; }
+.pdf-annotation-layer > div{ pointer-events:auto; }
+.pdf-notes-layer{ position:absolute; top:0; left:0; pointer-events:none; }
+.pdf-note-pin{ position:absolute; width:22px; height:22px; border-radius:50% 50% 50% 4px; background:var(--gold); color:#1a1a1a; display:flex; align-items:center; justify-content:center; font-size:11px; cursor:pointer; pointer-events:auto; transform:translate(-4px,-18px); box-shadow:0 2px 6px rgba(0,0,0,.4); }
+.pdf-side-panel{ width:300px; border-left:1px solid var(--border-soft); background:var(--surface); display:flex; flex-direction:column; flex-shrink:0; }
+.pdf-side-tabs{ display:flex; border-bottom:1px solid var(--border-soft); flex-shrink:0; }
+.pdf-side-tabs button{ flex:1; padding:10px 4px; font-size:11.5px; background:transparent; border:none; color:var(--text-dim); cursor:pointer; border-bottom:2px solid transparent; }
+.pdf-side-tabs button.active{ color:var(--text); border-bottom-color:var(--accent); }
+.pdf-side-content{ flex:1; overflow-y:auto; padding:12px 14px; }
+.tool-swatch{ width:20px; height:20px; border-radius:50%; cursor:pointer; border:2px solid transparent; flex-shrink:0; }
+.tool-swatch.underline-swatch{ border-radius:4px; height:7px; align-self:center; }
+.tool-swatch.active-tool{ border-color:var(--text); box-shadow:0 0 0 2px var(--surface), 0 0 0 3px var(--text); }
+.pdf-side-hl-item{ padding:9px 0; border-bottom:1px solid var(--border-soft); font-size:12px; cursor:pointer; line-height:1.4; }
+.pdf-side-hl-item:hover{ background:var(--surface-hover); }
+.anno-color-dot{ width:18px; height:18px; border-radius:50%; cursor:pointer; display:inline-block; }
+.pdf-icon-toggle.on{ color:var(--gold); border-color:var(--gold); }
 </style>
 </head>
 <body data-theme="obsidian" data-density="comfortable">
@@ -610,6 +685,7 @@ textarea{ resize:vertical; min-height:60px; }
 <!-- FOLDER CONTEXT MENU -->
 <div class="hidden" id="folderMenu" style="position:fixed; z-index:300; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-sm); box-shadow:var(--shadow-2); min-width:150px; overflow:hidden;">
   <div class="folder-menu-item" data-act="rename" style="padding:9px 13px; font-size:12.5px; cursor:pointer; color:var(--text-dim);">Rename</div>
+  <div class="folder-menu-item" data-act="toggle-hidden" style="padding:9px 13px; font-size:12.5px; cursor:pointer; color:var(--text-dim);">Hide folder</div>
   <div class="folder-menu-item" data-act="delete" style="padding:9px 13px; font-size:12.5px; cursor:pointer; color:var(--danger);">Delete folder</div>
 </div>
 
@@ -645,6 +721,65 @@ textarea{ resize:vertical; min-height:60px; }
 <input type="file" id="hiddenFileInput" class="hidden" />
 <input type="file" id="folderImportInput" class="hidden" webkitdirectory directory multiple />
 
+<!-- PDF VIEWER -->
+<div class="pdf-viewer-overlay hidden" id="pdfViewerOverlay">
+  <div class="pdf-toolbar">
+    <button class="btn btn-sm pdf-back-btn" id="pdfBackBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M15 18l-6-6 6-6"/></svg>
+      Back to Library
+    </button>
+    <div class="pdf-title" id="pdfViewerTitle"></div>
+    <div class="pdf-toolbar-group">
+      <button class="icon-btn" id="pdfZoomOutBtn" title="Zoom out">−</button>
+      <span class="small-note" id="pdfZoomLabel">100%</span>
+      <button class="icon-btn" id="pdfZoomInBtn" title="Zoom in">+</button>
+    </div>
+    <div class="pdf-toolbar-group">
+      <button class="icon-btn" id="pdfPrevBtn" title="Previous page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <input class="pdf-page-input" id="pdfPageInput" type="number" min="1" />
+      <span id="pdfPageIndicator" class="small-note"></span>
+      <button class="icon-btn" id="pdfNextBtn" title="Next page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M9 18l6-6-6-6"/></svg></button>
+    </div>
+    <div class="pdf-toolbar-group" id="pdfToolGroup"></div>
+    <div class="pdf-toolbar-group">
+      <button class="btn btn-sm" id="pdfNotesPanelBtn">Notes &amp; Bookmarks</button>
+      <button class="btn btn-sm" id="pdfDownloadBtn">Download annotated PDF</button>
+    </div>
+  </div>
+  <div class="pdf-body">
+    <div class="pdf-page-scroll" id="pdfPageScroll">
+      <div class="pdf-page-stack" id="pdfPageStack">
+        <canvas id="pdfCanvas"></canvas>
+        <div class="textLayer" id="pdfTextLayer"></div>
+        <div class="pdf-annotation-layer" id="pdfAnnotationLayer"></div>
+        <div class="pdf-notes-layer" id="pdfNotesLayer"></div>
+      </div>
+    </div>
+    <div class="pdf-side-panel hidden" id="pdfSidePanel">
+      <div class="pdf-side-tabs">
+        <button class="active" data-tab="bookmarks">Bookmarks</button>
+        <button data-tab="highlights">Highlights &amp; Notes</button>
+        <button data-tab="search">Find</button>
+      </div>
+      <div class="pdf-side-content" id="pdfSideContent"></div>
+    </div>
+  </div>
+</div>
+
+<div class="hidden" id="annoPopover" style="position:fixed; z-index:600; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-sm); box-shadow:var(--shadow-2); padding:10px; width:220px;">
+  <div id="annoPopoverColors" style="display:flex; gap:6px; margin-bottom:8px;"></div>
+  <textarea id="annoPopoverNote" placeholder="Add a short note…" style="width:100%; min-height:54px; font-size:12px; background:var(--surface-2); border:1px solid var(--border); border-radius:6px; color:var(--text); padding:6px; font-family:inherit;"></textarea>
+  <div style="display:flex; justify-content:space-between; margin-top:8px;">
+    <button class="btn btn-sm btn-danger" id="annoPopoverDelete">Delete</button>
+    <button class="btn btn-sm btn-primary" id="annoPopoverSave">Save</button>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script>
+  if(window.pdfjsLib){ pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js'; }
+</script>
 <script>
 /* ============================================================
    NEET LIBRARY — app.js
@@ -686,6 +821,9 @@ const ICONS = {
   trash: '<path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>',
   check: '<path d="M20 6L9 17l-5-5"/>',
   plus: '<path d="M12 5v14M5 12h14"/>',
+  bookmark: '<path d="M6 3h12a1 1 0 0 1 1 1v17l-7-4-7 4V4a1 1 0 0 1 1-1z"/>',
+  eye: '<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/>',
+  eyeOff: '<path d="M17.94 17.94A10.94 10.94 0 0 1 12 19c-7 0-11-7-11-7a20.3 20.3 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 7 11 7a20.3 20.3 0 0 1-2.16 3.19M14.12 14.12a3 3 0 1 1-4.24-4.24"/><path d="M1 1l22 22"/>',
 };
 function icon(name, size=16){ return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="${size}" height="${size}">${ICONS[name]||ICONS.other}</svg>`; }
 
@@ -721,7 +859,7 @@ function defaultSubjectFolders(extra){
 function buildDefaultTree(){
   const uidCounter = {n:0};
   function mk(name, icoKey, children){
-    return {id:'f_'+(uidCounter.n++)+'_'+Math.random().toString(36).slice(2,7), name, custom:false, children: children||[]};
+    return {id:'f_'+(uidCounter.n++)+'_'+Math.random().toString(36).slice(2,7), name, custom:false, hidden:false, children: children||[]};
   }
   function leaf(name){ return mk(name, null, []); }
 
@@ -736,7 +874,7 @@ function buildDefaultTree(){
     mk('Botany', 'botany', defaultSubjectFolders(['Diagrams']).map(leaf)),
     mk('Zoology', 'zoology', defaultSubjectFolders(['Diagrams']).map(leaf)),
     mk('Mind Maps', 'mindmap', []),
-    mk('NEET Strategies', 'strategy', ['Study Strategy','Revision Strategy','Test Strategy','Time Management','Exam Strategy'].map(leaf)),
+    mk('NEET Strategies', 'strategy', []),
   ];
   return tree;
 }
@@ -826,6 +964,8 @@ function defaultSettings(){
     defaultView: 'grid',
     confirmDestructive: true,
     lastExportAt: null,
+    revisionSubjectTab: 'Physics',
+    chapterSortMode: 'default',
   };
 }
 function defaultData(){
@@ -835,7 +975,28 @@ function defaultData(){
     resources: {},
     favourites: [],
     revision: {},
+    chapterRevisions: {Physics:[], Chemistry:[], Botany:[], Zoology:[]},
   };
+}
+// Fills in chapterRevisions for libraries saved before this feature existed,
+// and backfills "completed", "confidence", and per-source ("subTasks") tracking
+// for chapters saved before those existed.
+function ensureChapterRevisions(){
+  if(!DATA.chapterRevisions) DATA.chapterRevisions = {};
+  ['Physics','Chemistry','Botany','Zoology'].forEach(s=>{
+    if(!DATA.chapterRevisions[s]) DATA.chapterRevisions[s] = [];
+    DATA.chapterRevisions[s].forEach(ch=>{
+      if(typeof ch.completed !== 'boolean') ch.completed = false;
+      if(ch.completedAt === undefined) ch.completedAt = null;
+      if(typeof ch.confidence !== 'number') ch.confidence = 0;
+      if(!ch.subTasks) ch.subTasks = {ncert:false, notes:false, pyq:false};
+      else{
+        if(typeof ch.subTasks.ncert !== 'boolean') ch.subTasks.ncert = false;
+        if(typeof ch.subTasks.notes !== 'boolean') ch.subTasks.notes = false;
+        if(typeof ch.subTasks.pyq !== 'boolean') ch.subTasks.pyq = false;
+      }
+    });
+  });
 }
 
 let saveTimer = null;
@@ -900,6 +1061,17 @@ async function loadAll(){
   // migrations placeholder
   if(!DATA.version) DATA.version = SCHEMA_VERSION;
   if(!SETTINGS.version) SETTINGS.version = SCHEMA_VERSION;
+  ensureChapterRevisions();
+  if(!SETTINGS.revisionSubjectTab) SETTINGS.revisionSubjectTab = 'Physics';
+  if(!SETTINGS.chapterSortMode) SETTINGS.chapterSortMode = 'default';
+  ensureFolderFlags(DATA.tree);
+}
+// Backfills hidden:false on folders saved before the hide/show feature existed.
+function ensureFolderFlags(nodes){
+  (nodes||[]).forEach(n=>{
+    if(typeof n.hidden !== 'boolean') n.hidden = false;
+    if(n.children && n.children.length) ensureFolderFlags(n.children);
+  });
 }
 
 /* ---------------------- HELPERS ---------------------- */
@@ -993,6 +1165,71 @@ let STATE = {
   breadcrumbPath: [],
 };
 let bannerDismissedThisSession = false;
+let showHiddenFoldersInView = false;
+let lastRenderedFolderIdForHidden = null;
+function isRootFolder(fid){ return DATA.tree.some(n=>n.id===fid); }
+
+/* ---------------------- BROWSER BACK/FORWARD (history API) ----------------------
+   Every real navigation (folder change, section switch, opening the PDF viewer or
+   image preview) pushes a browser history entry, so the native Back/Forward
+   buttons, keyboard shortcuts, and Mac trackpad swipe gestures all move through
+   the library the way you'd expect — same as switching pages in a normal site. */
+let SUPPRESS_HISTORY = false;
+function currentAppState(){
+  if(typeof pdfViewerOpen==='function' && pdfViewerOpen() && PDF_STATE.resource){
+    return {mode:'pdf', resourceId:PDF_STATE.resource.id, page:PDF_STATE.currentPage};
+  }
+  if(typeof imagePreviewOpenCheck==='function' && imagePreviewOpenCheck()){
+    const r = previewState.list[previewState.index];
+    return {mode:'image', resourceId: r?r.id:null, folderId: r?r.folderId:null};
+  }
+  return {mode:'lib', view:STATE.view, folderId:STATE.folderId};
+}
+function pushHistory(replace){
+  if(SUPPRESS_HISTORY) return;
+  const state = currentAppState();
+  try{
+    if(replace) history.replaceState(state, '');
+    else history.pushState(state, '');
+  }catch(e){ /* history API unavailable in this context — fail silently */ }
+}
+function goToLibraryView(view, folderId){
+  STATE.view = view;
+  STATE.folderId = folderId || null;
+  render();
+  pushHistory(false);
+}
+window.addEventListener('popstate', (e)=>{
+  SUPPRESS_HISTORY = true;
+  try{
+    const state = e.state || {mode:'lib', view:'dashboard', folderId:null};
+    if(state.mode==='pdf'){
+      if(typeof closeImagePreviewOnly==='function') closeImagePreviewOnly();
+      const resource = DATA.resources[state.resourceId];
+      if(resource && (resource.fileData || PDF_BYTES_CACHE.has(resource.id))){
+        const buf = resource.fileData ? dataURLToArrayBuffer(resource.fileData) : PDF_BYTES_CACHE.get(resource.id);
+        startPdfViewer(resource, buf, state.page||1, false);
+      } else {
+        if(typeof hidePdfViewerOnly==='function') hidePdfViewerOnly();
+        if(resource) toast('Go forward again to reopen — choose the file once more', 'other');
+        render();
+      }
+    } else if(state.mode==='image'){
+      if(typeof hidePdfViewerOnly==='function') hidePdfViewerOnly();
+      const resource = DATA.resources[state.resourceId];
+      if(resource) openImagePreview(resource, false);
+      else { if(typeof closeImagePreviewOnly==='function') closeImagePreviewOnly(); render(); }
+    } else {
+      if(typeof hidePdfViewerOnly==='function') hidePdfViewerOnly();
+      if(typeof closeImagePreviewOnly==='function') closeImagePreviewOnly();
+      STATE.view = state.view || 'dashboard';
+      STATE.folderId = state.folderId || null;
+      render();
+    }
+  } finally {
+    SUPPRESS_HISTORY = false;
+  }
+});
 
 /* ---------------------- RENDER: SIDEBAR ---------------------- */
 function topFolderIdByName(name){
@@ -1039,8 +1276,7 @@ function renderSidebar(){
           const fid = topFolderIdByName(NAV_TO_TREE_NAME[item.id]);
           navigateToFolder(fid);
         } else {
-          STATE.view = item.id; STATE.folderId=null;
-          render();
+          goToLibraryView(item.id, null);
         }
         closeMobileSidebar();
       };
@@ -1051,9 +1287,7 @@ function renderSidebar(){
 }
 
 function navigateToFolder(fid){
-  STATE.view = 'folder';
-  STATE.folderId = fid;
-  render();
+  goToLibraryView('folder', fid);
 }
 function closeMobileSidebar(){ document.getElementById('appShell').classList.remove('mobile-open'); }
 
@@ -1161,7 +1395,7 @@ function renderDashboard(c){
     t.onclick = ()=>{
       const navId = t.dataset.nav;
       if(NAV_TO_TREE_NAME[navId]) navigateToFolder(topFolderIdByName(NAV_TO_TREE_NAME[navId]));
-      else { STATE.view=navId; STATE.folderId=null; render(); }
+      else goToLibraryView(navId, null);
     };
   });
 
@@ -1174,7 +1408,7 @@ function renderDashboard(c){
     document.getElementById('backupNowBtn').onclick = exportLibrary;
     document.getElementById('dismissBackupBtn').onclick = ()=>{ bannerDismissedThisSession=true; renderDashboard(c); };
   }
-  c.querySelectorAll('[data-goto]').forEach(a=> a.onclick = ()=>{ STATE.view=a.dataset.goto; STATE.folderId=null; render(); });
+  c.querySelectorAll('[data-goto]').forEach(a=> a.onclick = ()=> goToLibraryView(a.dataset.goto, null));
 
   if(recent.length===0 && totalResources===0){
     document.getElementById('recentList').innerHTML = `<div class="empty-state" style="padding:24px 10px;"><h3>Your library is empty</h3><p>Add your first resource — a PDF, an image, a link, or a note file — to get started.</p></div>`;
@@ -1199,15 +1433,18 @@ function renderListRows(elId, items, subFn){
 /* ---------------------- FOLDER VIEW ---------------------- */
 function renderFolderView(c){
   const folder = folderById(STATE.folderId);
-  if(!folder){ STATE.view='dashboard'; return renderDashboard(c); }
-  const subFolders = folder.children || [];
+  if(!folder){ STATE.view='dashboard'; STATE.folderId=null; pushHistory(true); return renderDashboard(c); }
+  if(STATE.folderId !== lastRenderedFolderIdForHidden){ showHiddenFoldersInView = false; lastRenderedFolderIdForHidden = STATE.folderId; }
+  const allSubFolders = folder.children || [];
+  const subFolders = allSubFolders.filter(f=>!f.hidden);
+  const hiddenSubFolders = allSubFolders.filter(f=>f.hidden);
   const directResources = resourcesInFolder(folder.id, false).sort((a,b)=>b.updatedAt-a.updatedAt);
 
   c.innerHTML = `
     <div class="page-header">
       <div>
         <div class="page-title">${escapeHtml(folder.name)}</div>
-        <div class="page-sub">${subFolders.length} folder${subFolders.length===1?'':'s'} · ${directResources.length} resource${directResources.length===1?'':'s'} here</div>
+        <div class="page-sub">${allSubFolders.length} folder${allSubFolders.length===1?'':'s'} · ${directResources.length} resource${directResources.length===1?'':'s'} here</div>
       </div>
       <div class="page-actions">
         <button class="btn btn-sm" id="newFolderBtn">${icon('folder',14)} New folder</button>
@@ -1215,20 +1452,22 @@ function renderFolderView(c){
         <button class="btn btn-primary btn-sm" id="folderAddResourceBtn">${icon('plus',14)} Add resource</button>
       </div>
     </div>
-    ${subFolders.length ? `<div class="section-label">Folders</div><div class="folder-grid" id="subfolderGrid"></div>` : ''}
+    ${subFolders.length || (hiddenSubFolders.length && showHiddenFoldersInView) ? `<div class="section-label">Folders</div><div class="folder-grid" id="subfolderGrid"></div>` : ''}
+    ${hiddenSubFolders.length ? `<div class="small-note" id="toggleHiddenFoldersLink" style="cursor:pointer; margin:-6px 0 16px 0; display:inline-flex; align-items:center; gap:5px;">${icon(showHiddenFoldersInView?'eyeOff':'eye',12)} ${showHiddenFoldersInView? 'Hide hidden folders' : `Show ${hiddenSubFolders.length} hidden folder${hiddenSubFolders.length===1?'':'s'}`}</div>` : ''}
     <div class="section-label">Resources</div>
     <div id="resourceArea"></div>
   `;
 
-  if(subFolders.length){
+  const foldersToRender = showHiddenFoldersInView ? allSubFolders : subFolders;
+  if(foldersToRender.length){
     const grid = document.getElementById('subfolderGrid');
-    grid.innerHTML = subFolders.map(f=>{
+    grid.innerHTML = foldersToRender.map(f=>{
       const count = resourcesInFolder(f.id, true).length;
-      const menuBtn = f.custom ? `<button class="rc-mini-btn folder-menu-trigger" data-fid="${f.id}" style="position:absolute; top:10px; right:10px; padding:2px 7px;">⋮</button>` : '';
-      return `<div class="folder-card" data-fid="${f.id}" style="position:relative;">
+      const menuBtn = `<button class="rc-mini-btn folder-menu-trigger" data-fid="${f.id}" style="position:absolute; top:10px; right:10px; padding:2px 7px;">⋮</button>`;
+      return `<div class="folder-card ${f.hidden?'is-hidden-folder':''}" data-fid="${f.id}" style="position:relative;">
         ${menuBtn}
         <div class="f-ico">${icon('folder',17)}</div>
-        <div><div class="f-name">${escapeHtml(f.name)}</div><div class="f-count">${count} item${count===1?'':'s'}</div></div>
+        <div><div class="f-name">${escapeHtml(f.name)}${f.hidden?' <span class="small-note">(hidden)</span>':''}</div><div class="f-count">${count} item${count===1?'':'s'}</div></div>
       </div>`;
     }).join('');
     grid.querySelectorAll('.folder-card').forEach(card=>{
@@ -1238,8 +1477,13 @@ function renderFolderView(c){
       btn.onclick = (e)=>{ e.stopPropagation(); showFolderMenu(e.currentTarget, btn.dataset.fid); };
     });
   }
-  // allow rename/delete of the current folder itself if it's custom (not top-level defaults)
-  if(folder.custom){
+  const toggleLink = document.getElementById('toggleHiddenFoldersLink');
+  if(toggleLink){
+    toggleLink.onclick = ()=>{ showHiddenFoldersInView = !showHiddenFoldersInView; renderFolderView(c); };
+  }
+  // allow rename/hide/delete of the current folder itself, unless it's one of the
+  // seven top-level sections (those stay fixed so the sidebar always works).
+  if(!isRootFolder(folder.id)){
     const titleEl = document.querySelector('.page-title');
     const menuBtn = document.createElement('button');
     menuBtn.className = 'icon-btn'; menuBtn.style.marginLeft = '10px'; menuBtn.style.display='inline-flex'; menuBtn.style.verticalAlign='middle';
@@ -1268,7 +1512,7 @@ function renderResourceGrid(elId, resources){
   el.querySelectorAll('.resource-card').forEach(card=>{
     const r = DATA.resources[card.dataset.id];
     card.addEventListener('click', (e)=>{
-      if(e.target.closest('.rc-star') || e.target.closest('.rc-mini-btn')) return;
+      if(e.target.closest('.rc-star') || e.target.closest('.rc-mini-btn') || e.target.closest('.rc-revise-group')) return;
       openResource(r);
     });
     card.querySelector('.rc-star').onclick = (e)=>{ e.stopPropagation(); toggleFavourite(r.id); };
@@ -1276,8 +1520,10 @@ function renderResourceGrid(elId, resources){
     if(editBtn) editBtn.onclick = (e)=>{ e.stopPropagation(); openResourceModal({resource:r}); };
     const revBtn = card.querySelector('.rc-rev');
     if(revBtn) revBtn.onclick = (e)=>{ e.stopPropagation(); toggleRevision(r.id); };
-    const reviseBtn = card.querySelector('.rc-revise');
-    if(reviseBtn) reviseBtn.onclick = (e)=>{ e.stopPropagation(); reviseResource(r.id); };
+    const reviseMinus = card.querySelector('.rc-revise-minus');
+    if(reviseMinus) reviseMinus.onclick = (e)=>{ e.stopPropagation(); reviseResource(r.id, -1); };
+    const revisePlus = card.querySelector('.rc-revise-plus');
+    if(revisePlus) revisePlus.onclick = (e)=>{ e.stopPropagation(); reviseResource(r.id, 1); };
   });
 }
 function resourceCardHtml(r){
@@ -1301,25 +1547,37 @@ function resourceCardHtml(r){
     <div class="rc-actions">
       <button class="rc-mini-btn rc-edit">Edit</button>
       <button class="rc-mini-btn rc-rev">${isMarked?'Unmark':'Mark revision'}</button>
-      <button class="rc-mini-btn rc-revise" title="Count this as a revision">Revise +1</button>
+      <div class="rc-revise-group" title="Times revised — use − if you tapped by mistake">
+        <button class="rc-revise-minus" ${revCount<=0?'disabled':''}>–</button>
+        <span class="rc-revise-count">${revCount}</span>
+        <button class="rc-revise-plus">+</button>
+      </div>
     </div>
   </div>`;
 }
 
 function openResource(r){
   r.updatedAt = r.updatedAt; // keep updatedAt as edit time
-  r.openedAt = Date.now();
-  scheduleSaveData();
   const tm = typeMeta(r.type);
   if(tm.kind==='url'){
+    r.openedAt = Date.now();
+    scheduleSaveData();
     if(r.url) window.open(r.url, '_blank', 'noopener');
     else toast('No link saved for this resource', 'other');
     return;
   }
+  if(r.type==='pdf'){
+    openPdfViewer(r);
+    return;
+  }
   if(r.type==='image' && r.fileData){
+    r.openedAt = Date.now();
+    scheduleSaveData();
     openImagePreview(r);
     return;
   }
+  r.openedAt = Date.now();
+  scheduleSaveData();
   // file kind
   if(r.fileData){
     // embedded — open in new tab via data URL / blob
@@ -1359,21 +1617,534 @@ function openLocateFileFlow(r){
   input.click();
 }
 
+/* ============================================================
+   PDF VIEWER — rendering, highlighting, sticky notes, bookmarks
+   ============================================================ */
+const HIGHLIGHT_COLORS = ['#f6c945','#7cd992','#79c1e8','#f19ec2','#f2a154'];
+const PDF_BASE_SCALE = 1.3;
+let PDF_STATE = { doc:null, resource:null, currentPage:1, numPages:0, scale:PDF_BASE_SCALE, tool:null, textCache:{}, originalBytes:null };
+let pdfSideTab = 'bookmarks';
+// session-only cache of raw PDF bytes, so reference-only (large) files don't need
+// re-picking every single time you reopen them within the same browser session —
+// only after a full page reload.
+const PDF_BYTES_CACHE = new Map();
+
+function ensureAnnotationStore(resource){
+  if(!resource.pdfAnnotations){
+    resource.pdfAnnotations = {highlights:[], notes:[], bookmarks:[], lastPage:1};
+    scheduleSaveData();
+  }
+  resource.pdfAnnotations.highlights = resource.pdfAnnotations.highlights || [];
+  resource.pdfAnnotations.notes = resource.pdfAnnotations.notes || [];
+  resource.pdfAnnotations.bookmarks = resource.pdfAnnotations.bookmarks || [];
+}
+function dataURLToArrayBuffer(dataUrl){
+  const b64 = dataUrl.split(',')[1];
+  const bin = atob(b64);
+  const arr = new Uint8Array(bin.length);
+  for(let i=0;i<bin.length;i++) arr[i]=bin.charCodeAt(i);
+  return arr.buffer;
+}
+function legacyOpenPdfFallback(r){
+  if(r.fileData){
+    try{
+      const blob = dataURLtoBlob(r.fileData);
+      const url = URL.createObjectURL(blob);
+      window.open(url, '_blank', 'noopener');
+      setTimeout(()=>URL.revokeObjectURL(url), 60000);
+    }catch(e){ toast('Could not open file', 'other'); }
+  } else {
+    openLocateFileFlow(r);
+  }
+}
+function pdfViewerOpen(){ return !document.getElementById('pdfViewerOverlay').classList.contains('hidden'); }
+
+// Public entry point — called when a PDF resource card is clicked.
+async function openPdfViewer(resource){
+  if(typeof pdfjsLib === 'undefined'){
+    toast('The PDF viewer library could not load — opening in a new tab instead', 'other');
+    legacyOpenPdfFallback(resource);
+    return;
+  }
+  if(resource.fileData){
+    const buf = dataURLToArrayBuffer(resource.fileData);
+    await startPdfViewer(resource, buf, null, true);
+  } else if(PDF_BYTES_CACHE.has(resource.id)){
+    await startPdfViewer(resource, PDF_BYTES_CACHE.get(resource.id), null, true);
+  } else {
+    const input = document.getElementById('hiddenFileInput');
+    input.value = '';
+    input.onchange = async ()=>{
+      const file = input.files[0];
+      if(!file) return;
+      const buf = await file.arrayBuffer();
+      await startPdfViewer(resource, buf, null, true);
+    };
+    toast('This PDF is stored as a reference — choose it from your computer to open and annotate it', 'other');
+    input.click();
+  }
+}
+// pushHistory: whether to push a new browser-history entry (true when the user
+// explicitly opened the viewer) vs. false (when popstate is restoring it).
+async function startPdfViewer(resource, arrayBuffer, gotoPage, pushHistoryEntry){
+  PDF_STATE.resource = resource;
+  PDF_STATE.originalBytes = arrayBuffer.slice(0);
+  PDF_BYTES_CACHE.set(resource.id, arrayBuffer.slice(0));
+  document.getElementById('pdfViewerOverlay').classList.remove('hidden');
+  document.getElementById('pdfViewerTitle').textContent = resource.name;
+  document.getElementById('pdfSidePanel').classList.add('hidden');
+  let doc;
+  try{
+    doc = await pdfjsLib.getDocument({data: arrayBuffer.slice(0)}).promise;
+  }catch(e){
+    toast('Could not open this PDF — the file may be corrupted', 'other');
+    document.getElementById('pdfViewerOverlay').classList.add('hidden');
+    return;
+  }
+  PDF_STATE.doc = doc;
+  PDF_STATE.numPages = doc.numPages;
+  PDF_STATE.scale = PDF_BASE_SCALE;
+  PDF_STATE.tool = null;
+  PDF_STATE.textCache = {};
+  ensureAnnotationStore(resource);
+  document.getElementById('pdfPageInput').max = PDF_STATE.numPages;
+  document.getElementById('pdfZoomLabel').textContent = '100%';
+  renderToolGroup();
+  const startPage = gotoPage || Math.min(resource.pdfAnnotations.lastPage||1, PDF_STATE.numPages);
+  await renderPdfPage(startPage);
+  if(pushHistoryEntry) pushHistory(false);
+}
+// Called only from the popstate handler (browser Back/Forward) or the initial
+// load — never pushes/replaces history itself.
+function hidePdfViewerOnly(){
+  document.getElementById('pdfViewerOverlay').classList.add('hidden');
+  hideAnnotationPopover();
+  if(PDF_STATE.doc && PDF_STATE.doc.destroy){ try{ PDF_STATE.doc.destroy(); }catch(e){} }
+  PDF_STATE = { doc:null, resource:null, currentPage:1, numPages:0, scale:PDF_BASE_SCALE, tool:null, textCache:{}, originalBytes:null };
+}
+// Called from the "Back to Library" button / Escape key — defers to the browser's
+// own history so native Back/Forward (buttons, keyboard, trackpad swipe) stays in sync.
+function closePdfViewer(){
+  if(history.state && history.state.mode==='pdf') history.back();
+  else { hidePdfViewerOnly(); render(); }
+}
+async function renderPdfPage(pageNum){
+  const resource = PDF_STATE.resource;
+  PDF_STATE.currentPage = pageNum;
+  resource.pdfAnnotations.lastPage = pageNum;
+  resource.openedAt = Date.now();
+  scheduleSaveData();
+  pushHistory(true); // keep the current page in the history entry without spamming the stack
+
+  const page = await PDF_STATE.doc.getPage(pageNum);
+  const viewport = page.getViewport({scale: PDF_STATE.scale});
+  const canvas = document.getElementById('pdfCanvas');
+  canvas.width = viewport.width; canvas.height = viewport.height;
+  const ctx = canvas.getContext('2d');
+  await page.render({canvasContext: ctx, viewport}).promise;
+
+  const stack = document.getElementById('pdfPageStack');
+  stack.style.width = viewport.width+'px';
+  stack.style.height = viewport.height+'px';
+
+  const textContent = await page.getTextContent();
+  const textLayerDiv = document.getElementById('pdfTextLayer');
+  textLayerDiv.innerHTML = '';
+  textLayerDiv.style.width = viewport.width+'px';
+  textLayerDiv.style.height = viewport.height+'px';
+  try{
+    pdfjsLib.renderTextLayer({ textContent, container: textLayerDiv, viewport, textDivs: [] });
+  }catch(e){ /* text layer is a progressive enhancement; ignore failures */ }
+  PDF_STATE.textCache[pageNum] = textContent.items.map(it=>it.str).join(' ');
+
+  const annoLayer = document.getElementById('pdfAnnotationLayer');
+  annoLayer.style.width = viewport.width+'px';
+  annoLayer.style.height = viewport.height+'px';
+  const notesLayer = document.getElementById('pdfNotesLayer');
+  notesLayer.style.width = viewport.width+'px';
+  notesLayer.style.height = viewport.height+'px';
+
+  drawAnnotationsForPage(pageNum);
+  drawStickyNotesForPage(pageNum);
+
+  document.getElementById('pdfPageIndicator').textContent = `of ${PDF_STATE.numPages}`;
+  document.getElementById('pdfPrevBtn').disabled = pageNum<=1;
+  document.getElementById('pdfNextBtn').disabled = pageNum>=PDF_STATE.numPages;
+  document.getElementById('pdfPageInput').value = pageNum;
+  renderBookmarkToggleState();
+  if(!document.getElementById('pdfSidePanel').classList.contains('hidden')) renderSidePanelContent();
+}
+
+/* ---- toolbar ---- */
+function renderToolGroup(){
+  const g = document.getElementById('pdfToolGroup');
+  let html = `<button class="icon-btn" id="pdfToolSelect" title="Read / select text mode">${icon('search',15)}</button>`;
+  html += `<span class="small-note" style="margin:0 2px 0 6px;">Highlight</span>`;
+  html += HIGHLIGHT_COLORS.map(c=>`<span class="tool-swatch" data-tool="highlight" data-c="${c}" style="background:${c}"></span>`).join('');
+  html += `<span class="small-note" style="margin:0 2px 0 8px;">Underline</span>`;
+  html += HIGHLIGHT_COLORS.map(c=>`<span class="tool-swatch underline-swatch" data-tool="underline" data-c="${c}" style="background:${c}"></span>`).join('');
+  html += `<button class="icon-btn" id="pdfToolNote" title="Add a sticky note">${icon('note',15)}</button>`;
+  html += `<button class="icon-btn" id="pdfBookmarkBtn" title="Bookmark this page">${icon('bookmark',15)}</button>`;
+  g.innerHTML = html;
+  g.querySelectorAll('.tool-swatch').forEach(sw=>{
+    sw.onclick = ()=>{
+      const type = sw.dataset.tool, color = sw.dataset.c;
+      if(PDF_STATE.tool && PDF_STATE.tool.type===type && PDF_STATE.tool.color===color) PDF_STATE.tool = null;
+      else PDF_STATE.tool = {type, color};
+      updateToolActiveStates();
+    };
+  });
+  document.getElementById('pdfToolSelect').onclick = ()=>{ PDF_STATE.tool=null; updateToolActiveStates(); };
+  document.getElementById('pdfToolNote').onclick = ()=>{
+    PDF_STATE.tool = (PDF_STATE.tool && PDF_STATE.tool.type==='note') ? null : {type:'note'};
+    updateToolActiveStates();
+  };
+  document.getElementById('pdfBookmarkBtn').onclick = toggleBookmarkCurrentPage;
+  updateToolActiveStates();
+}
+function updateToolActiveStates(){
+  const g = document.getElementById('pdfToolGroup');
+  g.querySelectorAll('.tool-swatch').forEach(sw=>{
+    const match = PDF_STATE.tool && PDF_STATE.tool.type===sw.dataset.tool && PDF_STATE.tool.color===sw.dataset.c;
+    sw.classList.toggle('active-tool', !!match);
+  });
+  document.getElementById('pdfToolSelect').classList.add('pdf-icon-toggle');
+  document.getElementById('pdfToolSelect').classList.toggle('on', !PDF_STATE.tool);
+  document.getElementById('pdfToolNote').classList.add('pdf-icon-toggle');
+  document.getElementById('pdfToolNote').classList.toggle('on', !!(PDF_STATE.tool && PDF_STATE.tool.type==='note'));
+}
+
+/* ---- annotation capture ---- */
+function captureSelectionAsAnnotation(){
+  const sel = window.getSelection();
+  if(!sel || sel.isCollapsed || sel.rangeCount===0) return;
+  const range = sel.getRangeAt(0);
+  const rects = Array.from(range.getClientRects());
+  if(rects.length===0) return;
+  const containerRect = document.getElementById('pdfAnnotationLayer').getBoundingClientRect();
+  const relRects = rects.map(r=>({
+    x: (r.left - containerRect.left)/containerRect.width,
+    y: (r.top - containerRect.top)/containerRect.height,
+    w: r.width/containerRect.width,
+    h: r.height/containerRect.height,
+  })).filter(r=>r.w>0 && r.h>0);
+  if(relRects.length===0) return;
+  const text = sel.toString();
+  const id = 'an_'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+  const anno = {id, page:PDF_STATE.currentPage, rects:relRects, color:PDF_STATE.tool.color, type:PDF_STATE.tool.type, text, note:''};
+  PDF_STATE.resource.pdfAnnotations.highlights.push(anno);
+  scheduleSaveData();
+  sel.removeAllRanges();
+  drawAnnotationsForPage(PDF_STATE.currentPage);
+  toast(PDF_STATE.tool.type==='highlight' ? 'Highlighted' : 'Underlined');
+}
+function drawAnnotationsForPage(pageNum){
+  const annoLayer = document.getElementById('pdfAnnotationLayer');
+  annoLayer.innerHTML = '';
+  const w = annoLayer.clientWidth, h = annoLayer.clientHeight;
+  const items = PDF_STATE.resource.pdfAnnotations.highlights.filter(a=>a.page===pageNum);
+  items.forEach(a=>{
+    a.rects.forEach(r=>{
+      const div = document.createElement('div');
+      div.style.position='absolute';
+      div.style.cursor='pointer';
+      if(a.type==='highlight'){
+        div.style.left=(r.x*w)+'px'; div.style.top=(r.y*h)+'px';
+        div.style.width=(r.w*w)+'px'; div.style.height=(r.h*h)+'px';
+        div.style.background=a.color; div.style.opacity='0.42'; div.style.mixBlendMode='multiply';
+      } else {
+        div.style.left=(r.x*w)+'px'; div.style.top=((r.y+r.h*0.85)*h)+'px';
+        div.style.width=(r.w*w)+'px'; div.style.height=Math.max(2,r.h*0.16*h)+'px';
+        div.style.background=a.color;
+      }
+      div.title = a.note ? a.note : 'Click to add a note or change color';
+      div.onclick = (e)=>{ e.stopPropagation(); openAnnotationPopover(a, div); };
+      annoLayer.appendChild(div);
+    });
+  });
+}
+function drawStickyNotesForPage(pageNum){
+  const layer = document.getElementById('pdfNotesLayer');
+  layer.innerHTML = '';
+  const w = layer.clientWidth, h = layer.clientHeight;
+  PDF_STATE.resource.pdfAnnotations.notes.filter(n=>n.page===pageNum).forEach(n=>{
+    const pin = document.createElement('div');
+    pin.className = 'pdf-note-pin';
+    pin.dataset.id = n.id;
+    pin.style.left=(n.x*w)+'px'; pin.style.top=(n.y*h)+'px';
+    pin.textContent = '📝';
+    pin.title = n.text || 'Empty note — click to edit';
+    pin.onclick = (e)=>{ e.stopPropagation(); openAnnotationPopover(n, pin); };
+    layer.appendChild(pin);
+  });
+}
+function createStickyNoteAt(pageNum, x, y){
+  const id = 'note_'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+  const note = {id, page:pageNum, x, y, text:'', createdAt:Date.now()};
+  PDF_STATE.resource.pdfAnnotations.notes.push(note);
+  scheduleSaveData();
+  drawStickyNotesForPage(pageNum);
+  setTimeout(()=>{
+    const pin = document.querySelector(`.pdf-note-pin[data-id="${id}"]`);
+    if(pin) openAnnotationPopover(note, pin);
+  }, 0);
+}
+
+/* ---- annotation popover (edit/delete/recolor) ---- */
+function openAnnotationPopover(obj, anchorEl){
+  const pop = document.getElementById('annoPopover');
+  const rect = anchorEl.getBoundingClientRect();
+  pop.style.top = Math.min(rect.bottom+6, window.innerHeight-220)+'px';
+  pop.style.left = Math.min(rect.left, window.innerWidth-236)+'px';
+  pop.classList.remove('hidden');
+  const isNote = obj.x !== undefined;
+  const colorsWrap = document.getElementById('annoPopoverColors');
+  if(isNote){
+    colorsWrap.style.display = 'none';
+  } else {
+    colorsWrap.style.display = 'flex';
+    colorsWrap.innerHTML = HIGHLIGHT_COLORS.map(c=>`<span class="anno-color-dot" data-c="${c}" style="background:${c}; outline:${obj.color===c?'2px solid var(--text)':'none'}"></span>`).join('');
+    colorsWrap.querySelectorAll('.anno-color-dot').forEach(dot=>{
+      dot.onclick = ()=>{ obj.color = dot.dataset.c; scheduleSaveData(); drawAnnotationsForPage(PDF_STATE.currentPage); openAnnotationPopover(obj, anchorEl); };
+    });
+  }
+  const ta = document.getElementById('annoPopoverNote');
+  ta.value = isNote ? (obj.text||'') : (obj.note||'');
+  ta.placeholder = isNote ? 'What do you want to remember here?' : 'Add a short note about this highlight…';
+  document.getElementById('annoPopoverSave').onclick = ()=>{
+    if(isNote) obj.text = ta.value; else obj.note = ta.value;
+    scheduleSaveData();
+    hideAnnotationPopover();
+    if(isNote) drawStickyNotesForPage(PDF_STATE.currentPage); else drawAnnotationsForPage(PDF_STATE.currentPage);
+    if(!document.getElementById('pdfSidePanel').classList.contains('hidden')) renderSidePanelContent();
+    toast('Saved');
+  };
+  document.getElementById('annoPopoverDelete').onclick = ()=>{
+    if(isNote) PDF_STATE.resource.pdfAnnotations.notes = PDF_STATE.resource.pdfAnnotations.notes.filter(n=>n.id!==obj.id);
+    else PDF_STATE.resource.pdfAnnotations.highlights = PDF_STATE.resource.pdfAnnotations.highlights.filter(h=>h.id!==obj.id);
+    scheduleSaveData();
+    hideAnnotationPopover();
+    if(isNote) drawStickyNotesForPage(PDF_STATE.currentPage); else drawAnnotationsForPage(PDF_STATE.currentPage);
+    if(!document.getElementById('pdfSidePanel').classList.contains('hidden')) renderSidePanelContent();
+    toast('Deleted');
+  };
+  setTimeout(()=>document.addEventListener('click', hidePopoverOnOutsideClick), 0);
+}
+function hideAnnotationPopover(){
+  document.getElementById('annoPopover').classList.add('hidden');
+  document.removeEventListener('click', hidePopoverOnOutsideClick);
+}
+function hidePopoverOnOutsideClick(e){
+  const pop = document.getElementById('annoPopover');
+  if(!pop.contains(e.target)) hideAnnotationPopover();
+}
+
+/* ---- bookmarks ---- */
+function toggleBookmarkCurrentPage(){
+  const bms = PDF_STATE.resource.pdfAnnotations.bookmarks;
+  const idx = bms.findIndex(b=>b.page===PDF_STATE.currentPage);
+  if(idx>=0){ bms.splice(idx,1); toast('Bookmark removed'); }
+  else { bms.push({page:PDF_STATE.currentPage, label:'Page '+PDF_STATE.currentPage, createdAt:Date.now()}); toast('Bookmarked'); }
+  scheduleSaveData();
+  renderBookmarkToggleState();
+  if(!document.getElementById('pdfSidePanel').classList.contains('hidden')) renderSidePanelContent();
+}
+function renderBookmarkToggleState(){
+  const btn = document.getElementById('pdfBookmarkBtn');
+  if(!btn) return;
+  const bookmarked = PDF_STATE.resource.pdfAnnotations.bookmarks.some(b=>b.page===PDF_STATE.currentPage);
+  btn.classList.add('pdf-icon-toggle');
+  btn.classList.toggle('on', bookmarked);
+}
+
+/* ---- side panel ---- */
+function renderSidePanelContent(){
+  const el = document.getElementById('pdfSideContent');
+  const anns = PDF_STATE.resource.pdfAnnotations;
+  if(pdfSideTab==='bookmarks'){
+    if(anns.bookmarks.length===0){ el.innerHTML='<div class="small-note">No bookmarks yet. Use the bookmark icon in the toolbar to save a page.</div>'; return; }
+    el.innerHTML = anns.bookmarks.slice().sort((a,b)=>a.page-b.page).map(b=>`<div class="pdf-side-hl-item" data-page="${b.page}">${icon('bookmark',13)} &nbsp;${escapeHtml(b.label)}</div>`).join('');
+    el.querySelectorAll('.pdf-side-hl-item').forEach(row=> row.onclick=()=>renderPdfPage(+row.dataset.page));
+  } else if(pdfSideTab==='highlights'){
+    const items = [...anns.highlights.map(h=>({...h,_kind:'hl'})), ...anns.notes.map(n=>({...n,_kind:'note'}))].sort((a,b)=>a.page-b.page);
+    if(items.length===0){ el.innerHTML='<div class="small-note">Nothing highlighted or noted yet.</div>'; return; }
+    el.innerHTML = `<button class="btn btn-sm" id="copyAllAnnosBtn" style="margin-bottom:10px; width:100%;">Copy all as text</button>` + items.map(it=>{
+      if(it._kind==='hl'){
+        return `<div class="pdf-side-hl-item" data-page="${it.page}"><span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:${it.color}; margin-right:6px;"></span>p.${it.page} — "${escapeHtml((it.text||'').slice(0,70))}"${it.note?`<div class="small-note" style="margin-top:3px;">${escapeHtml(it.note)}</div>`:''}</div>`;
+      }
+      return `<div class="pdf-side-hl-item" data-page="${it.page}">📝 p.${it.page} — ${escapeHtml((it.text||'(empty note)').slice(0,80))}</div>`;
+    }).join('');
+    el.querySelectorAll('.pdf-side-hl-item').forEach(row=> row.onclick=()=>renderPdfPage(+row.dataset.page));
+    document.getElementById('copyAllAnnosBtn').onclick = copyAllAnnotationsAsText;
+  } else if(pdfSideTab==='search'){
+    el.innerHTML = `<input class="input" id="pdfSearchInput" placeholder="Search text in this PDF…" style="margin-bottom:10px;" />
+      <div id="pdfSearchResults" class="small-note">Type and press Enter to search.</div>`;
+    document.getElementById('pdfSearchInput').addEventListener('keydown', async (e)=>{
+      if(e.key==='Enter') await runPdfSearch(e.target.value);
+    });
+  }
+}
+function copyAllAnnotationsAsText(){
+  const anns = PDF_STATE.resource.pdfAnnotations;
+  const lines = [];
+  anns.highlights.slice().sort((a,b)=>a.page-b.page).forEach(h=>{
+    lines.push(`p.${h.page} — "${(h.text||'').trim()}"${h.note? ' — '+h.note : ''}`);
+  });
+  anns.notes.slice().sort((a,b)=>a.page-b.page).forEach(n=>{
+    if(n.text) lines.push(`p.${n.page} (note) — ${n.text.trim()}`);
+  });
+  if(lines.length===0){ toast('Nothing to copy yet', 'other'); return; }
+  navigator.clipboard.writeText(lines.join('\n'))
+    .then(()=>toast('Copied to clipboard'))
+    .catch(()=>toast('Could not copy — try selecting manually', 'other'));
+}
+async function ensureAllPagesTextCached(){
+  for(let p=1;p<=PDF_STATE.numPages;p++){
+    if(!PDF_STATE.textCache[p]){
+      const page = await PDF_STATE.doc.getPage(p);
+      const tc = await page.getTextContent();
+      PDF_STATE.textCache[p] = tc.items.map(it=>it.str).join(' ');
+    }
+  }
+}
+async function runPdfSearch(q){
+  q = q.trim().toLowerCase();
+  const resultsEl = document.getElementById('pdfSearchResults');
+  if(!q){ resultsEl.textContent = 'Type and press Enter to search.'; return; }
+  resultsEl.textContent = 'Searching…';
+  await ensureAllPagesTextCached();
+  const matches = [];
+  for(let p=1;p<=PDF_STATE.numPages;p++){
+    if((PDF_STATE.textCache[p]||'').toLowerCase().includes(q)) matches.push(p);
+  }
+  if(matches.length===0){ resultsEl.textContent = 'No matches found.'; return; }
+  resultsEl.innerHTML = matches.map(p=>`<div class="pdf-side-hl-item" data-page="${p}">Page ${p}</div>`).join('');
+  resultsEl.querySelectorAll('.pdf-side-hl-item').forEach(row=> row.onclick=()=>renderPdfPage(+row.dataset.page));
+}
+
+/* ---- download annotated pdf ---- */
+function hexToRgb01(hex){
+  const v = hex.replace('#','');
+  return { r: parseInt(v.substring(0,2),16)/255, g: parseInt(v.substring(2,4),16)/255, b: parseInt(v.substring(4,6),16)/255 };
+}
+async function downloadAnnotatedPdf(){
+  if(typeof PDFLib === 'undefined'){ toast('The PDF export library could not load', 'other'); return; }
+  const highlights = PDF_STATE.resource.pdfAnnotations.highlights;
+  if(highlights.length===0){ toast('No highlights or underlines to bake in yet', 'other'); return; }
+  toast('Preparing annotated PDF…');
+  try{
+    const { PDFDocument, rgb } = PDFLib;
+    const pdfDoc = await PDFDocument.load(PDF_STATE.originalBytes.slice(0));
+    const pages = pdfDoc.getPages();
+    highlights.forEach(a=>{
+      const page = pages[a.page-1];
+      if(!page) return;
+      const { width, height } = page.getSize();
+      const c = hexToRgb01(a.color);
+      a.rects.forEach(r=>{
+        const x = r.x*width, yTop = r.y*height, w = r.w*width, h = r.h*height;
+        const yPdf = height - yTop - h;
+        if(a.type==='highlight'){
+          page.drawRectangle({ x, y:yPdf, width:w, height:h, color: rgb(c.r,c.g,c.b), opacity:0.38 });
+        } else {
+          const underlineH = Math.max(1, h*0.14);
+          page.drawRectangle({ x, y:yPdf, width:w, height:underlineH, color: rgb(c.r,c.g,c.b), opacity:0.9 });
+        }
+      });
+    });
+    const bytes = await pdfDoc.save();
+    const blob = new Blob([bytes], {type:'application/pdf'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = (PDF_STATE.resource.name||'document') + '-annotated.pdf';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url), 5000);
+    toast('Downloaded annotated PDF');
+  }catch(e){
+    console.error(e);
+    toast('Could not export the annotated PDF', 'other');
+  }
+}
+
+/* ---- toolbar wiring (elements exist from page load) ---- */
+document.getElementById('pdfBackBtn').onclick = closePdfViewer;
+document.getElementById('pdfDownloadBtn').onclick = downloadAnnotatedPdf;
+document.getElementById('pdfPrevBtn').onclick = ()=>{ if(PDF_STATE.currentPage>1) renderPdfPage(PDF_STATE.currentPage-1); };
+document.getElementById('pdfNextBtn').onclick = ()=>{ if(PDF_STATE.currentPage<PDF_STATE.numPages) renderPdfPage(PDF_STATE.currentPage+1); };
+document.getElementById('pdfPageInput').addEventListener('change', (e)=>{
+  let p = parseInt(e.target.value,10);
+  if(isNaN(p)) p = 1;
+  p = Math.max(1, Math.min(PDF_STATE.numPages, p));
+  renderPdfPage(p);
+});
+document.getElementById('pdfZoomInBtn').onclick = ()=>{
+  PDF_STATE.scale = Math.min(3, PDF_STATE.scale+0.15);
+  document.getElementById('pdfZoomLabel').textContent = Math.round(PDF_STATE.scale/PDF_BASE_SCALE*100)+'%';
+  renderPdfPage(PDF_STATE.currentPage);
+};
+document.getElementById('pdfZoomOutBtn').onclick = ()=>{
+  PDF_STATE.scale = Math.max(0.5, PDF_STATE.scale-0.15);
+  document.getElementById('pdfZoomLabel').textContent = Math.round(PDF_STATE.scale/PDF_BASE_SCALE*100)+'%';
+  renderPdfPage(PDF_STATE.currentPage);
+};
+document.getElementById('pdfNotesPanelBtn').onclick = ()=>{
+  const panel = document.getElementById('pdfSidePanel');
+  panel.classList.toggle('hidden');
+  if(!panel.classList.contains('hidden')) renderSidePanelContent();
+};
+document.querySelectorAll('#pdfSidePanel .pdf-side-tabs button').forEach(b=>{
+  b.onclick = ()=>{
+    pdfSideTab = b.dataset.tab;
+    document.querySelectorAll('#pdfSidePanel .pdf-side-tabs button').forEach(x=>x.classList.toggle('active', x===b));
+    renderSidePanelContent();
+  };
+});
+document.getElementById('pdfPageStack').addEventListener('mouseup', ()=>{
+  if(PDF_STATE.tool && (PDF_STATE.tool.type==='highlight' || PDF_STATE.tool.type==='underline')) captureSelectionAsAnnotation();
+});
+document.getElementById('pdfPageStack').addEventListener('click', (e)=>{
+  if(PDF_STATE.tool && PDF_STATE.tool.type==='note'){
+    if(e.target.closest('.pdf-note-pin')) return;
+    const rect = document.getElementById('pdfPageStack').getBoundingClientRect();
+    const x = (e.clientX-rect.left)/rect.width;
+    const y = (e.clientY-rect.top)/rect.height;
+    createStickyNoteAt(PDF_STATE.currentPage, x, y);
+  }
+});
+document.addEventListener('keydown', (e)=>{
+  if(!pdfViewerOpen()) return;
+  if(['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) return;
+  if(e.key==='Escape') closePdfViewer();
+  else if(e.key==='ArrowRight'){ if(PDF_STATE.currentPage<PDF_STATE.numPages) renderPdfPage(PDF_STATE.currentPage+1); }
+  else if(e.key==='ArrowLeft'){ if(PDF_STATE.currentPage>1) renderPdfPage(PDF_STATE.currentPage-1); }
+});
+
 /* ---------------------- IMAGE PREVIEW (prev / next) ---------------------- */
 let previewState = { list: [], index: -1 };
+function imagePreviewOpenCheck(){ return document.getElementById('imagePreviewOverlay').classList.contains('open'); }
 function imageResourcesInFolder(folderId){
   return Object.values(DATA.resources)
     .filter(r=> r.folderId===folderId && r.type==='image' && r.fileData)
     .sort((a,b)=>b.updatedAt-a.updatedAt);
 }
-function openImagePreview(r){
+// pushHistoryEntry: true when the user explicitly opened the preview; false when
+// the popstate handler is restoring it after a Back/Forward navigation.
+function openImagePreview(r, pushHistoryEntry=true){
   const siblings = imageResourcesInFolder(r.folderId);
   const idx = siblings.findIndex(s=>s.id===r.id);
   previewState = { list: siblings.length ? siblings : [r], index: idx<0 ? 0 : idx };
-  renderPreview();
   document.getElementById('imagePreviewOverlay').classList.add('open');
+  renderPreview();
+  if(pushHistoryEntry) pushHistory(false);
 }
-function closeImagePreview(){ document.getElementById('imagePreviewOverlay').classList.remove('open'); }
+// Internal hide only — used by the popstate handler. Never touches history itself.
+function closeImagePreviewOnly(){ document.getElementById('imagePreviewOverlay').classList.remove('open'); }
+// Public close — Close button / backdrop click / Escape key. Defers to the
+// browser's own history so Back/Forward (including trackpad swipe) stays in sync.
+function closeImagePreview(){
+  if(history.state && history.state.mode==='image') history.back();
+  else closeImagePreviewOnly();
+}
 function renderPreview(){
   const r = previewState.list[previewState.index];
   if(!r) return;
@@ -1388,6 +2159,7 @@ function renderPreview(){
   document.getElementById('previewNextBtn').disabled = previewState.index>=previewState.list.length-1;
   r.openedAt = Date.now();
   scheduleSaveData();
+  pushHistory(true); // keep which image is showing in sync without spamming the history stack
 }
 document.getElementById('previewPrevBtn').onclick = ()=>{ if(previewState.index>0){ previewState.index--; renderPreview(); } };
 document.getElementById('previewNextBtn').onclick = ()=>{ if(previewState.index<previewState.list.length-1){ previewState.index++; renderPreview(); } };
@@ -1407,7 +2179,7 @@ document.getElementById('previewOpenBtn').onclick = ()=>{
 };
 document.getElementById('imagePreviewOverlay').addEventListener('click', (e)=>{ if(e.target.id==='imagePreviewOverlay') closeImagePreview(); });
 document.addEventListener('keydown', (e)=>{
-  if(!document.getElementById('imagePreviewOverlay').classList.contains('open')) return;
+  if(!imagePreviewOpenCheck()) return;
   if(e.key==='ArrowLeft') document.getElementById('previewPrevBtn').click();
   else if(e.key==='ArrowRight') document.getElementById('previewNextBtn').click();
   else if(e.key==='Escape') closeImagePreview();
@@ -1426,13 +2198,15 @@ function toggleRevision(id){
   scheduleSaveData();
   render();
 }
-function reviseResource(id){
+function reviseResource(id, delta=1){
   if(!DATA.revision[id]) DATA.revision[id] = {marked:false};
-  DATA.revision[id].count = (DATA.revision[id].count||0) + 1;
-  DATA.revision[id].lastRevisedAt = Date.now();
+  const cur = DATA.revision[id].count||0;
+  const next = Math.max(0, cur+delta);
+  DATA.revision[id].count = next;
+  if(delta>0) DATA.revision[id].lastRevisedAt = Date.now();
   scheduleSaveData();
   render();
-  toast('Revision counted — '+DATA.revision[id].count+' total');
+  toast(delta>0 ? ('Revision counted — '+next+' total') : ('Reduced to '+next+' — good if that was a mistap'));
 }
 // Sums revision counts per subject and per folder/chapter, for the Revision tab.
 function computeRevisionStats(){
@@ -1461,8 +2235,240 @@ function computeRevisionStats(){
   return {perSubject, folderRows};
 }
 
+/* ---------------------- CHAPTER REVISION LOG ----------------------
+   A lighter, manual tracker: type in a chapter name under a subject,
+   then log a date each time you revise it (or remove one you logged
+   by mistake). Independent of the resource-level revise counter above. */
+let revisionSubjectTab = 'Physics';
+function todayISO(){
+  const d = new Date();
+  const tz = d.getTimezoneOffset()*60000;
+  return new Date(d-tz).toISOString().slice(0,10);
+}
+function formatDateStr(iso){
+  const d = new Date(iso+'T00:00:00');
+  if(isNaN(d)) return iso;
+  return d.toLocaleDateString(undefined,{month:'short', day:'numeric', year:'numeric'});
+}
+function addChapterEntry(subject, name){
+  ensureChapterRevisions();
+  const id = 'ch_'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+  DATA.chapterRevisions[subject].push({id, name, dates:[], completed:false, completedAt:null, confidence:0, subTasks:{ncert:false, notes:false, pyq:false}});
+  scheduleSaveData();
+}
+function toggleChapterCompleted(subject, id){
+  ensureChapterRevisions();
+  const ch = DATA.chapterRevisions[subject].find(c=>c.id===id);
+  if(!ch) return;
+  ch.completed = !ch.completed;
+  ch.completedAt = ch.completed ? Date.now() : null;
+  scheduleSaveData();
+}
+function toggleChapterSubtask(subject, id, key){
+  ensureChapterRevisions();
+  const ch = DATA.chapterRevisions[subject].find(c=>c.id===id);
+  if(!ch) return;
+  ch.subTasks[key] = !ch.subTasks[key];
+  scheduleSaveData();
+}
+function setChapterConfidence(subject, id, value){
+  ensureChapterRevisions();
+  const ch = DATA.chapterRevisions[subject].find(c=>c.id===id);
+  if(!ch) return;
+  // clicking the dot that already matches the current rating clears it back to 0
+  ch.confidence = (ch.confidence === value) ? 0 : value;
+  scheduleSaveData();
+}
+function deleteChapterEntry(subject, id){
+  ensureChapterRevisions();
+  DATA.chapterRevisions[subject] = DATA.chapterRevisions[subject].filter(c=>c.id!==id);
+  scheduleSaveData();
+}
+function logChapterRevision(subject, id, dateStr){
+  ensureChapterRevisions();
+  const ch = DATA.chapterRevisions[subject].find(c=>c.id===id);
+  if(!ch || !dateStr) return;
+  ch.dates.push(dateStr);
+  ch.dates.sort((a,b)=> b.localeCompare(a));
+  scheduleSaveData();
+}
+function removeChapterDate(subject, id, idx){
+  ensureChapterRevisions();
+  const ch = DATA.chapterRevisions[subject].find(c=>c.id===id);
+  if(!ch) return;
+  ch.dates.splice(idx,1);
+  scheduleSaveData();
+}
+function confidenceColor(v){
+  if(v<=0) return 'var(--text-faint)';
+  if(v<=2) return 'var(--danger)';
+  if(v<=3) return 'var(--warn)';
+  return 'var(--success)';
+}
+function chapterRowHtml(ch){
+  const count = ch.dates.length;
+  const last = count ? formatDateStr(ch.dates[0]) : null;
+  const completed = !!ch.completed;
+  const conf = ch.confidence || 0;
+  const cColor = confidenceColor(conf);
+  const sub = ch.subTasks || {ncert:false, notes:false, pyq:false};
+  const subDefs = [['ncert','NCERT'],['notes','Notes'],['pyq','PYQs']];
+  const needsAttention = completed && conf>=1 && conf<=2;
+  return `<div class="chapter-row ${completed?'is-completed':''}" data-cid="${ch.id}">
+    <div class="chapter-row-top">
+      <div class="chapter-name">
+        <span class="chapter-tick ${completed?'on':''}" title="${completed?'Completed':'Not completed yet'}">${completed?icon('check',12):''}</span>
+        ${escapeHtml(ch.name)}
+        ${needsAttention ? `<span class="badge-weak">Needs attention</span>` : ''}
+      </div>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <div class="chapter-complete-toggle ${completed?'on':''}" title="${completed?'Completed — click to unmark':'Mark this chapter as completed'}">
+          <span class="cc-dot"></span>${completed?'Completed':'Mark completed'}
+        </div>
+        <button class="rc-mini-btn chapter-delete-btn" title="Delete chapter">${icon('trash',11)}</button>
+      </div>
+    </div>
+    <div class="subtask-row">
+      ${subDefs.map(([key,label])=>`<div class="subtask-chip ${sub[key]?'on':''}" data-key="${key}">${sub[key]?icon('check',11):''}<span>${label}</span></div>`).join('')}
+    </div>
+    <div class="confidence-row">
+      <span>How sure am I?</span>
+      <div class="confidence-dots">
+        ${[1,2,3,4,5].map(n=>`<span class="confidence-dot ${n<=conf?'filled':''}" data-v="${n}" style="${n<=conf?`background:${cColor}; border-color:${cColor};`:''}"></span>`).join('')}
+      </div>
+      <span class="confidence-label" style="color:${cColor};">${conf}/5</span>
+    </div>
+    <div class="chapter-meta">${completed ? `Completed ${ch.completedAt?timeAgo(ch.completedAt):''} · ` : ''}${count} revision${count===1?'':'s'}${last? ' · last on '+last : (completed?' · not revised yet':'')}</div>
+    ${completed ? `
+    <div class="chapter-log-row">
+      <input type="date" class="input chapter-date-input" value="${todayISO()}" max="${todayISO()}" />
+      <button class="btn btn-sm chapter-log-btn">${icon('plus',12)} Log revision</button>
+    </div>
+    ${count ? `<div class="chapter-dates">${ch.dates.map((d,i)=>`<span class="date-chip">${formatDateStr(d)}<button class="date-chip-remove" data-i="${i}" title="Remove this entry">×</button></span>`).join('')}</div>` : ''}
+    ` : `<div class="chapter-revision-locked">Mark this chapter completed once you've studied it — revisions are logged and counted from there.</div>`}
+  </div>`;
+}
+function renderChapterRevisionPanel(){
+  ensureChapterRevisions();
+  const subjects = ['Physics','Chemistry','Botany','Zoology'];
+  const chapters = (DATA.chapterRevisions[revisionSubjectTab] || []).slice();
+  const completedCount = chapters.filter(c=>c.completed).length;
+  const sortMode = SETTINGS.chapterSortMode || 'default';
+  if(sortMode==='weakest') chapters.sort((a,b)=>(a.confidence||0)-(b.confidence||0));
+  const avgConf = chapters.length ? (chapters.reduce((s,c)=>s+(c.confidence||0),0)/chapters.length) : 0;
+  return `
+    <div class="panel" style="margin-bottom:22px;">
+      <div class="panel-title"><span>Chapter revision log</span></div>
+      <div class="segmented" id="chapterSubjectSeg" style="margin-bottom:10px;">
+        ${subjects.map(s=>`<button data-v="${s}" class="${revisionSubjectTab===s?'active':''}">${s}</button>`).join('')}
+      </div>
+      ${chapters.length ? `
+      <div class="chapter-progress-line" style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;">
+        <span>${completedCount} of ${chapters.length} chapter${chapters.length===1?'':'s'} completed · avg confidence ${avgConf.toFixed(1)}/5</span>
+        <div class="segmented" id="chapterSortSeg">
+          <button data-v="default" class="${sortMode==='default'?'active':''}">Order added</button>
+          <button data-v="weakest" class="${sortMode==='weakest'?'active':''}">Weakest first</button>
+        </div>
+      </div>` : ''}
+      <div class="chapter-add-row">
+        <input type="text" class="input" id="chapterNameInput" placeholder="e.g. Laws of Motion" />
+        <button class="btn btn-primary btn-sm" id="chapterAddBtn">${icon('plus',13)} Add chapter</button>
+      </div>
+      <div id="chapterList">
+        ${chapters.length===0 ? `<div class="small-note" style="padding:4px 0 2px 0;">No chapters tracked yet for ${revisionSubjectTab}. Type a chapter name above and add it.</div>` : chapters.map(ch=>chapterRowHtml(ch)).join('')}
+      </div>
+    </div>
+  `;
+}
+function wireChapterPanel(c){
+  const seg = document.getElementById('chapterSubjectSeg');
+  if(seg) seg.querySelectorAll('button').forEach(b=> b.onclick = ()=>{
+    revisionSubjectTab = b.dataset.v;
+    SETTINGS.revisionSubjectTab = revisionSubjectTab;
+    scheduleSaveSettings();
+    renderRevisionView(c);
+  });
+  const sortSeg = document.getElementById('chapterSortSeg');
+  if(sortSeg) sortSeg.querySelectorAll('button').forEach(b=> b.onclick = ()=>{
+    SETTINGS.chapterSortMode = b.dataset.v;
+    scheduleSaveSettings();
+    renderRevisionView(c);
+  });
+  const addBtn = document.getElementById('chapterAddBtn');
+  const nameInput = document.getElementById('chapterNameInput');
+  if(addBtn) addBtn.onclick = ()=>{
+    const name = nameInput.value.trim();
+    if(!name){ toast('Enter a chapter name first', 'other'); return; }
+    addChapterEntry(revisionSubjectTab, name);
+    renderRevisionView(c);
+    toast('Chapter added');
+  };
+  if(nameInput) nameInput.addEventListener('keydown', (e)=>{
+    if(e.key==='Enter'){ e.preventDefault(); addBtn.click(); }
+  });
+  document.querySelectorAll('.chapter-complete-toggle').forEach(btn=>{
+    btn.onclick = ()=>{
+      const row = btn.closest('.chapter-row');
+      const cid = row.dataset.cid;
+      toggleChapterCompleted(revisionSubjectTab, cid);
+      renderRevisionView(c);
+      const ch = (DATA.chapterRevisions[revisionSubjectTab]||[]).find(x=>x.id===cid);
+      toast(ch && ch.completed ? 'Chapter marked completed' : 'Chapter marked incomplete');
+    };
+  });
+  document.querySelectorAll('.subtask-chip').forEach(chip=>{
+    chip.onclick = ()=>{
+      const row = chip.closest('.chapter-row');
+      const cid = row.dataset.cid;
+      toggleChapterSubtask(revisionSubjectTab, cid, chip.dataset.key);
+      renderRevisionView(c);
+    };
+  });
+  document.querySelectorAll('.confidence-dot').forEach(dot=>{
+    dot.onclick = ()=>{
+      const row = dot.closest('.chapter-row');
+      const cid = row.dataset.cid;
+      setChapterConfidence(revisionSubjectTab, cid, +dot.dataset.v);
+      renderRevisionView(c);
+    };
+  });
+  document.querySelectorAll('.chapter-delete-btn').forEach(btn=>{
+    btn.onclick = ()=>{
+      const row = btn.closest('.chapter-row');
+      const cid = row.dataset.cid;
+      const ch = (DATA.chapterRevisions[revisionSubjectTab]||[]).find(x=>x.id===cid);
+      confirmAction('Delete chapter?', `This removes "${ch?ch.name:'this chapter'}" and its revision history. This cannot be undone.`, ()=>{
+        deleteChapterEntry(revisionSubjectTab, cid);
+        renderRevisionView(c);
+        toast('Chapter deleted');
+      });
+    };
+  });
+  document.querySelectorAll('.chapter-log-btn').forEach(btn=>{
+    btn.onclick = ()=>{
+      const row = btn.closest('.chapter-row');
+      const cid = row.dataset.cid;
+      const dateVal = row.querySelector('.chapter-date-input').value;
+      if(!dateVal){ toast('Pick a date first', 'other'); return; }
+      logChapterRevision(revisionSubjectTab, cid, dateVal);
+      renderRevisionView(c);
+      toast('Revision logged');
+    };
+  });
+  document.querySelectorAll('.date-chip-remove').forEach(btn=>{
+    btn.onclick = ()=>{
+      const row = btn.closest('.chapter-row');
+      const cid = row.dataset.cid;
+      const idx = +btn.dataset.i;
+      removeChapterDate(revisionSubjectTab, cid, idx);
+      renderRevisionView(c);
+    };
+  });
+}
+
 /* ---------------------- REVISION VIEW ---------------------- */
 function renderRevisionView(c){
+  revisionSubjectTab = SETTINGS.revisionSubjectTab || revisionSubjectTab || 'Physics';
   const marked = Object.entries(DATA.revision).filter(([id,v])=>v.marked).map(([id,v])=>({...DATA.resources[id], _markedAt:v.markedAt})).filter(x=>x && x.id);
   marked.sort((a,b)=>b._markedAt-a._markedAt);
   const stats = computeRevisionStats();
@@ -1483,9 +2489,10 @@ function renderRevisionView(c){
     </div>
     ${stats.folderRows.length ? `
     <div class="panel" style="margin-bottom:22px;">
-      <div class="panel-title">Most-revised chapters</div>
+      <div class="panel-title">Most-revised folders</div>
       <div id="chapterRevList"></div>
     </div>` : ''}
+    ${renderChapterRevisionPanel()}
     <div class="section-label">Marked for revision</div>
     <div id="revArea"></div>
   `;
@@ -1499,10 +2506,11 @@ function renderRevisionView(c){
     </div>`).join('');
     el.querySelectorAll('.list-row').forEach(row=> row.onclick = ()=> navigateToFolder(row.dataset.fid));
   }
+  wireChapterPanel(c);
 
   const area = document.getElementById('revArea');
   if(marked.length===0){
-    area.innerHTML = `<div class="empty-state">${icon('revision',34)}<h3>Nothing marked for revision</h3><p>Open any resource card's actions and choose "Mark for revision" to add it here. "Revise +1" counts a revision for any resource, marked or not.</p></div>`;
+    area.innerHTML = `<div class="empty-state">${icon('revision',34)}<h3>Nothing marked for revision</h3><p>Open any resource card's actions and choose "Mark for revision" to add it here. The − / + counter tallies revisions for any resource, marked or not.</p></div>`;
     return;
   }
   area.innerHTML = `<div class="resource-grid" id="resGrid"></div>`;
@@ -1625,6 +2633,7 @@ function resetLibrary(){
   scheduleSaveData();
   STATE = {view:'dashboard', folderId:null};
   render();
+  pushHistory(true);
   toast('Library cleared');
 }
 
@@ -1958,7 +2967,7 @@ function ensureSubfolderPath(parentId, segments){
     parent.children = parent.children || [];
     let match = parent.children.find(c=>c.name.toLowerCase()===seg.toLowerCase());
     if(!match){
-      match = {id:'f_'+Date.now().toString(36)+Math.random().toString(36).slice(2,6)+Math.random().toString(36).slice(2,4), name:seg, custom:true, children:[]};
+      match = {id:'f_'+Date.now().toString(36)+Math.random().toString(36).slice(2,6)+Math.random().toString(36).slice(2,4), name:seg, custom:true, hidden:false, children:[]};
       parent.children.push(match);
     }
     currentId = match.id;
@@ -2040,7 +3049,7 @@ document.getElementById('ff-save-btn').onclick = ()=>{
   if(ffMode==='create'){
     const parent = folderById(ffParentId);
     parent.children = parent.children || [];
-    parent.children.push({id:'f_'+Date.now().toString(36)+Math.random().toString(36).slice(2,6), name, custom:true, children:[]});
+    parent.children.push({id:'f_'+Date.now().toString(36)+Math.random().toString(36).slice(2,6), name, custom:true, hidden:false, children:[]});
     toast('Folder created');
   } else {
     folderById(ffRenameId).name = name;
@@ -2087,6 +3096,7 @@ function deleteFolder(folderId){
   scheduleSaveData();
   if(STATE.folderId===folderId || (idsUnder.has(STATE.folderId))){ STATE.view='dashboard'; STATE.folderId=null; }
   render();
+  pushHistory(true);
 }
 
 /* ---------------------- FOLDER CONTEXT MENU ---------------------- */
@@ -2096,11 +3106,19 @@ function showFolderMenu(anchorEl, folderId){
   menu.style.top = (rect.bottom+6) + 'px';
   menu.style.left = Math.min(rect.left, window.innerWidth-170) + 'px';
   menu.classList.remove('hidden');
+  const f = folderById(folderId);
   const items = menu.querySelectorAll('.folder-menu-item');
   items[0].onclick = ()=>{ hideFolderMenu(); openRenameFolderModal(folderId); };
+  items[1].textContent = f.hidden ? 'Show folder' : 'Hide folder';
   items[1].onclick = ()=>{
     hideFolderMenu();
-    const f = folderById(folderId);
+    f.hidden = !f.hidden;
+    scheduleSaveData();
+    render();
+    toast(f.hidden ? 'Folder hidden' : 'Folder shown');
+  };
+  items[2].onclick = ()=>{
+    hideFolderMenu();
     const idsUnder = allFolderIdsUnder(folderId);
     const resourceCount = Object.values(DATA.resources).filter(r=>idsUnder.includes(r.folderId)).length;
     const body = resourceCount>0
@@ -2240,6 +3258,7 @@ async function init(){
   applySidebarCollapsed();
   render();
   markSaved();
+  pushHistory(true); // establish the baseline history entry so Back/Forward has somewhere to go
 }
 init();
 </script>
